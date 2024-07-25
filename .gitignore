@@ -6,6 +6,7 @@ __pycache__/
 */__pycache__/models.*.*
 */__pycache__/*
 *.cpython-310.pyc
+patients/__pycache__/models.cpython-310.pyc
 # C extensions
 *.so
 
