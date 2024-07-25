@@ -9,6 +9,9 @@ class StartTimeValidator:
       raise ValidationError("Start time should be before end time.")
 
 class Practitioner(models.Model):
+  def __str__(self):
+    return self.full_name + ', ' + self.practitioner_type
+    
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
   full_name = models.CharField(max_length=200, db_index=True)

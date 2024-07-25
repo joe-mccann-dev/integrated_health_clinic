@@ -1,0 +1,84 @@
+- model: appointments.practitioner
+  pk: 1
+  fields:
+    created_at: "2024-07-25T00:41:05.500072Z"
+    updated_at: "2024-07-25T00:41:05.500072Z"
+    full_name: "John Smith"
+    email: "john.smith@example.com"
+    gender: 1
+    dob: "1961-04-26"
+    license_number: "GZ123456789"
+    practitioner_type: "physician"
+    is_prescriber: True
+- model: appointments.practitioner
+  pk: 2
+  fields:
+    created_at: "2024-07-25T00:41:05.500072Z"
+    updated_at: "2024-07-25T00:41:05.500072Z"
+    full_name: "Amanda Wong"
+    email: "amanda.wong@example.com"
+    gender: 2
+    dob: "1982-06-27"
+    license_number: "AZ783717173"
+    practitioner_type: "massage_therapist"
+    is_prescriber: False
+- model: appointments.practitioner
+  pk: 3
+  fields:
+    created_at: "2024-07-25T00:41:05.500072Z"
+    updated_at: "2024-07-25T00:41:05.500072Z"
+    full_name: "Dirk Nowizski"
+    email: "dirk.nowizski@example.com"
+    gender: 2
+    dob: "1978-06-27"
+    license_number: "AZ78372FG73"
+    practitioner_type: "physician_assistant"
+    is_prescriber: True
+- model: appointments.practitioner
+  pk: 4
+  fields:
+    created_at: "2024-07-25T00:41:05.500072Z"
+    updated_at: "2024-07-25T00:41:05.500072Z"
+    full_name: "Trevor McDonald"
+    email: "trevor.mcdonald@example.com"
+    gender: 1
+    dob: "1988-09-27"
+    license_number: "BZ783717174"
+    practitioner_type: "physical_therapist"
+    is_prescriber: True
+- model: appointments.practitioner
+  pk: 5
+  fields:
+    created_at: "2024-07-25T00:41:05.500072Z"
+    updated_at: "2024-07-25T00:41:05.500072Z"
+    full_name: "Janice Westley"
+    email: "janice.westley@example.com"
+    gender: 2
+    dob: "1972-02-27"
+    license_number: "MZ783231176"
+    practitioner_type: "acupuncturist"
+    is_prescriber: False
+- model: appointments.practitioner
+  pk: 6
+  fields:
+    created_at: "2024-07-25T00:41:05.500072Z"
+    updated_at: "2024-07-25T00:41:05.500072Z"
+    full_name: "Christopher Johnson"
+    email: "christopher.johnson@example.com"
+    gender: 1
+    dob: "1990-06-27"
+    license_number: "BR191919323"
+    practitioner_type: "chiropractor"
+    is_prescriber: False
+- model: appointments.practitioner
+  pk: 7
+  fields:
+    created_at: "2024-07-25T00:41:05.500072Z"
+    updated_at: "2024-07-25T00:41:05.500072Z"
+    full_name: "Christine Nolan"
+    email: "christine.nolan@example.com"
+    gender: 2
+    dob: "1971-11-27"
+    license_number: "BX1919195553"
+    practitioner_type: "nurse_practitioner"
+    is_prescriber: False
