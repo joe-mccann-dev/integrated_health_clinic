@@ -34,7 +34,7 @@ class ChartNote(models.Model):
   updated_at = models.DateTimeField(auto_now=True)
   # prevent removal of important medical history
   appointment = models.ForeignKey('appointments.Appointment', on_delete=models.RESTRICT)
-  chart_note = models.TextField
+  chart_note = models.TextField(default="")
 
 # represent availability blocks with starting interval id
 # and ending interval id
@@ -42,7 +42,7 @@ class ChartNote(models.Model):
 # idea obtained from https://stackoverflow.com/questions/62232148/database-table-design-for-availability-within-time-ranges-per-day
 class TimeTable(models.Model):
   time_interval_id = models.SmallIntegerField(primary_key=True)
-  time_value = models.TimeField
+  time_value = models.TimeField(default='00:00:00')
 
 class Day(models.Model):
   day_id = models.SmallIntegerField(primary_key=True)
