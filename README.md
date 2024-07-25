@@ -20,7 +20,9 @@ This combined scheduling and charting web application is a group project for CIS
 5. In `settings.py`, under `DATABASES` change 'USER' from 'joe' to the username you established in step 2.
 6. In your PostgreSQL installation run query `CREATE DATABASE clinic;` as that same user;
 7. enter `python manage.py migrate`
-8. Seed TimeTable (command in appointments/management/commands): `python manage.py seed_time_table`
+8. Run seeds:
+  - Seed TimeTable (command in appointments/management/commands): `python manage.py seed_time_table`. 
+  - Seed Practitioner: `python manage.py loaddata seed_practitioners.yaml`
 9. enter `python manage.py runserver`
 10. If you installed pgAdmin4 web, after creating server group, view clinic database at http://127.0.0.1/pgAdmin4
 
