@@ -11,6 +11,15 @@
     gender: 1
     primary_practitioner: 7
 
+- model: patients.insuranceinfo
+  fields:
+    created_at: "2024-07-25T12:59:05.500072-04:00"
+    updated_at: "2024-07-25T12:59:05.500072-04:00"
+    patient: 1
+    provider: "Blue Cross Blue Shield of New Hampshire"
+    member_id: "GHN845526832"
+
+
 - model: patients.patient
   pk: 2
   fields:
@@ -23,6 +32,15 @@
     address: "12 Blue Jay Way, Portsmouth, NH, 03021"
     gender: 2
     primary_practitioner: 6
+
+- model: patients.insuranceinfo
+  fields:
+    created_at: "2024-07-25T12:59:05.500072-04:00"
+    updated_at: "2024-07-25T12:59:05.500072-04:00"
+    patient: 2
+    provider: "Tufts Health Plan"
+    member_id: "THP845526832"
+
 - model: patients.patient
   pk: 3
   fields:
@@ -35,6 +53,15 @@
     address: "11 Hoyt Ave, Exeter, NH, 03024"
     gender: 2
     primary_practitioner: 5
+
+- model: patients.insuranceinfo
+  fields:
+    created_at: "2024-07-25T12:59:05.500072-04:00"
+    updated_at: "2024-07-25T12:59:05.500072-04:00"
+    patient: 3
+    provider: "United Health Care"
+    member_id: "UHC845526833"
+
 - model: patients.patient
   pk: 4
   fields:
@@ -47,6 +74,15 @@
     address: "183 Main St, North Conway, NH 03021"
     gender: 1
     primary_practitioner: 4
+
+- model: patients.insuranceinfo
+  fields:
+    created_at: "2024-07-25T12:59:05.500072-04:00"
+    updated_at: "2024-07-25T12:59:05.500072-04:00"
+    patient: 4
+    provider: "Kaiser Permanente"
+    member_id: "KPE845526833"
+
 - model: patients.patient
   pk: 5
   fields:
@@ -59,6 +95,15 @@
     address: "11 Congress St, Hampton Beach, NH, 03020"
     gender: 2
     primary_practitioner: 3
+
+- model: patients.insuranceinfo
+  fields:
+    created_at: "2024-07-25T12:59:05.500072-04:00"
+    updated_at: "2024-07-25T12:59:05.500072-04:00"
+    patient: 5
+    provider: "Humana"
+    member_id: "HUM945526837"
+
 - model: patients.patient
   pk: 6
   fields:
@@ -71,6 +116,15 @@
     address: "27 W Elm St, Hampton Beach, NH, 03020"
     gender: 1
     primary_practitioner: 3
+
+- model: patients.insuranceinfo
+  fields:
+    created_at: "2024-07-25T12:59:05.500072-04:00"
+    updated_at: "2024-07-25T12:59:05.500072-04:00"
+    patient: 6
+    provider: "Anthem"
+    member_id: "ANT845526866"
+
 - model: patients.patient
   pk: 7
   fields:
@@ -83,6 +137,24 @@
     address: "17 Congress St, Portland, ME, 04101"
     gender: 1
     primary_practitioner: 3
+
+- model: patients.insuranceinfo
+  fields:
+    created_at: "2024-07-25T12:59:05.500072-04:00"
+    updated_at: "2024-07-25T12:59:05.500072-04:00"
+    patient: 7
+    provider: "Aetna"
+    member_id: "AET845526889"
+
+- model: patients.prescription
+  fields:
+    created_at: "2024-07-25T13:59:05.500072-04:00"
+    updated_at: "2024-07-25T13:59:05.500072-04:00"
+    name: "metoclopramide"
+    instructions: "10 mg by mouth 4 times daily for 1 to 2 months"
+    patient: 7
+    prescriber: 3
+
 - model: patients.patient
   pk: 8
   fields:
@@ -95,6 +167,9 @@
     address: "12 Campbell Rd, Scarborough, ME, 04107"
     gender: 3
     primary_practitioner: 2
+  
+# no insurance for patient 8
+
 - model: patients.patient
   pk: 9
   fields:
@@ -107,4 +182,21 @@
     address: "11 Scarborough Rd, Los Angeles, CA, 90203"
     gender: 1
     primary_practitioner: 1
-  
+
+- model: patients.insuranceinfo
+  fields:
+    created_at: "2024-07-25T12:59:05.500072-04:00"
+    updated_at: "2024-07-25T12:59:05.500072-04:00"
+    patient: 9
+    provider: "Cigna"
+    member_id: "CIG845526891"
+
+- model: patients.prescription
+  fields:
+    created_at: "2024-07-25T13:59:05.500072-04:00"
+    updated_at: "2024-07-25T13:59:05.500072-04:00"
+    name: "meloxicam"
+    instructions: "Take 10mg once daily with a meal"
+    patient: 9
+    prescriber: 1
+    

@@ -23,6 +23,7 @@ This combined scheduling and charting web application is a group project for CIS
 8. Run seeds:
   - Seed TimeTable (command in appointments/management/commands): `python manage.py seed_time_table`. 
   - Seed Practitioner: `python manage.py loaddata seed_practitioners.yaml`
+  - Seed Patient: `python manage.py loaddata seed_patients.yaml`
 9. enter `python manage.py runserver`
 10. If you installed pgAdmin4 web, after creating server group, view clinic database at http://127.0.0.1/pgAdmin4
 
