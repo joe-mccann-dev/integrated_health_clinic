@@ -2,12 +2,6 @@ from django.db import models
 from patients.models import Gender
 from django.core.exceptions import ValidationError
 
-class StartTimeValidator:
-  @staticmethod
-  def validate(instance):
-    if instance.start_time_interval >= instance.end_time_interval:
-      raise ValidationError("Start time should be before end time.")
-
 class Practitioner(models.Model):
   def __str__(self):
     return self.full_name + ', ' + self.practitioner_type
@@ -60,7 +54,12 @@ class Availability(models.Model):
   end_time_interval = models.SmallIntegerField()
 
   def clean(self):
-    StartTimeValidator.validate(self)
+    if self.start_time_interval >= self.end_time_interval:
+      raise ValidationError("Start time should be before end time.")
+  
+  def save(self, *args, **options):
+    self.clean()
+    super().save(*args, **options)
     
 class Appointment(models.Model):
   # TODO: Filter appointments by availability
@@ -74,4 +73,9 @@ class Appointment(models.Model):
   end_time_interval = models.SmallIntegerField()
     
   def clean(self):
-    StartTimeValidator.validate(self)
+    if self.start_time_interval >= self.end_time_interval:
+      raise ValidationError("Start time should be before end time.")
+    
+  def save(self, *args, **options):
+    self.clean()
+    super().save(*args, **options)

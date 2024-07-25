@@ -1,5 +1,5 @@
 from django.db import models
-# from appointments.models import Practitioner
+from django.core.exceptions import ValidationError
 
 class Gender(models.IntegerChoices):
   MALE = 1
@@ -32,3 +32,12 @@ class Prescription(models.Model):
   instructions = models.CharField(max_length=200)
   patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
   prescriber = models.ForeignKey('appointments.Practitioner', on_delete=models.SET_NULL, null=True)
+
+  def clean(self):
+    if not self.prescriber.is_prescriber:
+      raise ValidationError("Cannot create prescription: Practitioner is not a prescriber.")
+  
+  def save(self, *args, **options):
+    self.clean()
+    super().save(*args, **options)
+
