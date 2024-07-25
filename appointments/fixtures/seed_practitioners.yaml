@@ -147,7 +147,7 @@
 # Tuesday
 - model: appointments.availability
   fields:
-    practitioner: 1
+    practitioner: 2
     day: 2
     # Interval 85 = 2:00 PM
     start_time_interval: 85
@@ -156,7 +156,7 @@
 # Thursday
 - model: appointments.availability
   fields:
-    practitioner: 1
+    practitioner: 2
     day: 4
     # Interval 85 = 2:00 PM
     start_time_interval: 85
@@ -165,7 +165,7 @@
 # Saturday
 - model: appointments.availability
   fields:
-    practitioner: 1
+    practitioner: 2
     day: 6
     # Interval 85 = 2:00 PM
     start_time_interval: 85
@@ -174,7 +174,7 @@
 # Sunday
 - model: appointments.availability
   fields:
-    practitioner: 1
+    practitioner: 2
     day: 7
     # Interval 85 = 2:00 PM
     start_time_interval: 85
@@ -241,7 +241,8 @@
     practitioner: 5
     day: 1
     start_time_interval: 91
-    end_time_interval: 
+    end_time_interval: 115
+
 # Wednesday
 - model: appointments.availability
   fields:
@@ -266,58 +267,58 @@
 
 # Chiropractor Christopher Johnson is available Monday - Friday 8:00 AM to 1:00 PM
 - model: appointments.availability
-    fields:
-      practitioner: 6
-      day: 1
-      start_time_interval: 49
-      end_time_interval: 79
+  fields:
+    practitioner: 6
+    day: 1
+    start_time_interval: 49
+    end_time_interval: 79
 - model: appointments.availability
-    fields:
-      practitioner: 6
-      day: 2
-      start_time_interval: 49
-      end_time_interval: 79
+  fields:
+    practitioner: 6
+    day: 2
+    start_time_interval: 49
+    end_time_interval: 79
 - model: appointments.availability
-    fields:
-      practitioner: 6
-      day: 3
-      start_time_interval: 49
-      end_time_interval: 79
+  fields:
+    practitioner: 6
+    day: 3
+    start_time_interval: 49
+    end_time_interval: 79
 - model: appointments.availability
-    fields:
-      practitioner: 6
-      day: 4
-      start_time_interval: 49
-      end_time_interval: 79
+  fields:
+    practitioner: 6
+    day: 4
+    start_time_interval: 49
+    end_time_interval: 79
 - model: appointments.availability
-    fields:
-      practitioner: 6
-      day: 5
-      start_time_interval: 49
-      end_time_interval: 79
+  fields:
+    practitioner: 6
+    day: 5
+    start_time_interval: 49
+    end_time_interval: 79
 
 # Nurse Practitioner Christine Nolan is available Tuesday, Thursay, Friday 10:00 AM to 4:00 PM and Sunday 11:00 AM to 5:00 PM
 - model: appointments.availability
-    fields:
-      practitioner: 7
-      day: 2
-      start_time_interval: 61
-      end_time_interval: 97
+  fields:
+    practitioner: 7
+    day: 2
+    start_time_interval: 61
+    end_time_interval: 97
 - model: appointments.availability
-    fields:
-      practitioner: 7
-      day: 4
-      start_time_interval: 61
-      end_time_interval: 97
+  fields:
+    practitioner: 7
+    day: 4
+    start_time_interval: 61
+    end_time_interval: 97
 - model: appointments.availability
-    fields:
-      practitioner: 7
-      day: 5
-      start_time_interval: 61
-      end_time_interval: 97
+  fields:
+    practitioner: 7
+    day: 5
+    start_time_interval: 61
+    end_time_interval: 97
 - model: appointments.availability
-    fields:
-      practitioner: 7
-      day: 7
-      start_time_interval: 67
-      end_time_interval: 103
+  fields:
+    practitioner: 7
+    day: 7
+    start_time_interval: 67
+    end_time_interval: 103
