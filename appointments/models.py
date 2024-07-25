@@ -63,6 +63,7 @@ class Availability(models.Model):
     StartTimeValidator.validate(self)
     
 class Appointment(models.Model):
+  # TODO: Filter appointments by availability
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
   practitioner = models.ForeignKey('appointments.Practitioner', on_delete=models.CASCADE)
