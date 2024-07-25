@@ -63,6 +63,7 @@ class Availability(models.Model):
     
 class Appointment(models.Model):
   # TODO: Filter appointments by availability
+  # TODO: Update availability after an appointment is made
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
   practitioner = models.ForeignKey('appointments.Practitioner', on_delete=models.CASCADE)
