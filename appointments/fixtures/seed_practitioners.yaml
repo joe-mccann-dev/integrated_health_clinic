@@ -81,7 +81,7 @@
     dob: "1971-11-27"
     license_number: "BX1919195553"
     practitioner_type: "nurse_practitioner"
-    is_prescriber: False
+    is_prescriber: True
 
 
 - model: appointments.day
@@ -112,3 +112,212 @@
   fields:
     day_id: 7
     name: Sunday
+
+# Physician John Smith Available Monday (1), Wednesday (3), Friday (5) 9:00AM to 12:00PM
+# Availability Entry for each day available. Intervals every 10 minutes identified by ID
+# Monday
+- model: appointments.availability
+  fields:
+    practitioner: 1
+    day: 1
+    # Interval 55 = 9:00 AM
+    start_time_interval: 55
+    # Interval 73 = 12:00 PM
+    end_time_interval: 73
+# Wednesday
+- model: appointments.availability
+  fields:
+    practitioner: 1
+    day: 3
+    # Interval 55 = 9:00 AM
+    start_time_interval: 55
+    # Interval 73 = 12:00 PM
+    end_time_interval: 73
+# Friday
+- model: appointments.availability
+  fields:
+    practitioner: 1
+    day: 5
+    # Interval 55 = 9:00 AM
+    start_time_interval: 55
+    # Interval 73 = 12:00 PM
+    end_time_interval: 73
+
+# Massage Therapist Amanda Wong is available Tuesday, Thursday, Saturday, Sunday 2PM to 8PM
+# Tuesday
+- model: appointments.availability
+  fields:
+    practitioner: 1
+    day: 2
+    # Interval 85 = 2:00 PM
+    start_time_interval: 85
+    # Interval 121 = 8:00 PM
+    end_time_interval: 121
+# Thursday
+- model: appointments.availability
+  fields:
+    practitioner: 1
+    day: 4
+    # Interval 85 = 2:00 PM
+    start_time_interval: 85
+    # Interval 121 = 8:00 PM
+    end_time_interval: 121
+# Saturday
+- model: appointments.availability
+  fields:
+    practitioner: 1
+    day: 6
+    # Interval 85 = 2:00 PM
+    start_time_interval: 85
+    # Interval 121 = 8:00 PM
+    end_time_interval: 121
+# Sunday
+- model: appointments.availability
+  fields:
+    practitioner: 1
+    day: 7
+    # Interval 85 = 2:00 PM
+    start_time_interval: 85
+    # Interval 121 = 8:00 PM
+    end_time_interval: 121
+
+# Physician Assistant Dirk Nowizski is available Monday, Wednesday, Friday from 1:00 PM to 7:00 PM
+# Monday
+- model: appointments.availability
+  fields:
+    practitioner: 3
+    day: 1
+    start_time_interval: 79
+    end_time_interval: 115
+# Wednesday
+- model: appointments.availability
+  fields:
+    practitioner: 3
+    day: 3
+    start_time_interval: 79
+    end_time_interval: 115
+# Friday
+- model: appointments.availability
+  fields:
+    practitioner: 3
+    day: 5
+    start_time_interval: 79
+    end_time_interval: 115
+
+# Physical Therapist Trevor McDonald is available Monday, Tuesday, Wednesday, Saturday from 7:30 AM to 12:30 PM
+# Monday
+- model: appointments.availability
+  fields:
+    practitioner: 4
+    day: 1
+    start_time_interval: 46
+    end_time_interval: 76
+# Tuesday
+- model: appointments.availability
+  fields:
+    practitioner: 4
+    day: 2
+    start_time_interval: 46
+    end_time_interval: 76
+# Wedndesday
+- model: appointments.availability
+  fields:
+    practitioner: 4
+    day: 3
+    start_time_interval: 46
+    end_time_interval: 76
+# Saturday
+- model: appointments.availability
+  fields:
+    practitioner: 4
+    day: 6
+    start_time_interval: 46
+    end_time_interval: 76
+
+# Acupunturist Janice Westley is available Monday, Wednesday, Friday 3:00 PM to 7:00 PM and Saturday 9:00 AM to 1:00 PM
+# Monday
+- model: appointments.availability
+  fields:
+    practitioner: 5
+    day: 1
+    start_time_interval: 91
+    end_time_interval: 
+# Wednesday
+- model: appointments.availability
+  fields:
+    practitioner: 5
+    day: 3
+    start_time_interval: 91
+    end_time_interval: 115
+# Friday
+- model: appointments.availability
+  fields:
+    practitioner: 5
+    day: 5
+    start_time_interval: 91
+    end_time_interval: 115
+# Saturday
+- model: appointments.availability
+  fields:
+    practitioner: 5
+    day: 6
+    start_time_interval: 55
+    end_time_interval: 79
+
+# Chiropractor Christopher Johnson is available Monday - Friday 8:00 AM to 1:00 PM
+- model: appointments.availability
+    fields:
+      practitioner: 6
+      day: 1
+      start_time_interval: 49
+      end_time_interval: 79
+- model: appointments.availability
+    fields:
+      practitioner: 6
+      day: 2
+      start_time_interval: 49
+      end_time_interval: 79
+- model: appointments.availability
+    fields:
+      practitioner: 6
+      day: 3
+      start_time_interval: 49
+      end_time_interval: 79
+- model: appointments.availability
+    fields:
+      practitioner: 6
+      day: 4
+      start_time_interval: 49
+      end_time_interval: 79
+- model: appointments.availability
+    fields:
+      practitioner: 6
+      day: 5
+      start_time_interval: 49
+      end_time_interval: 79
+
+# Nurse Practitioner Christine Nolan is available Tuesday, Thursay, Friday 10:00 AM to 4:00 PM and Sunday 11:00 AM to 5:00 PM
+- model: appointments.availability
+    fields:
+      practitioner: 7
+      day: 2
+      start_time_interval: 61
+      end_time_interval: 97
+- model: appointments.availability
+    fields:
+      practitioner: 7
+      day: 4
+      start_time_interval: 61
+      end_time_interval: 97
+- model: appointments.availability
+    fields:
+      practitioner: 7
+      day: 5
+      start_time_interval: 61
+      end_time_interval: 97
+- model: appointments.availability
+    fields:
+      practitioner: 7
+      day: 7
+      start_time_interval: 67
+      end_time_interval: 103
