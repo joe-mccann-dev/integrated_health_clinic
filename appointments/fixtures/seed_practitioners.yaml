@@ -82,3 +82,33 @@
     license_number: "BX1919195553"
     practitioner_type: "nurse_practitioner"
     is_prescriber: False
+
+
+- model: appointments.day
+  fields:
+    day_id: 1
+    name: Monday
+- model: appointments.day
+  fields:
+    day_id: 2
+    name: Tuesday
+- model: appointments.day
+  fields:
+    day_id: 3
+    name: Wednesday
+- model: appointments.day
+  fields:
+    day_id: 4
+    name: Thursday
+- model: appointments.day
+  fields:
+    day_id: 5
+    name: Friday
+- model: appointments.day
+  fields:
+    day_id: 6
+    name: Saturday
+- model: appointments.day
+  fields:
+    day_id: 7
+    name: Sunday
