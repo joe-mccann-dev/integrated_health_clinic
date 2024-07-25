@@ -1,0 +1,110 @@
+- model: patients.patient
+  pk: 1
+  fields:
+    created_at: "2024-07-25T12:58:05.500072-04:00"
+    updated_at: "2024-07-25T12:58:05.500072-04:00"
+    first_name: "Joseph"
+    last_name: "McDonald"
+    email: "joseph.mcdonald@example.com"
+    dob: "1984-04-26"
+    address: "47 Congress St, Hampton Beach, NH, 03020"
+    gender: 1
+    primary_practitioner: 7
+
+- model: patients.patient
+  pk: 2
+  fields:
+    created_at: "2024-07-25T12:58:05.500072-04:00"
+    updated_at: "2024-07-25T12:58:05.500072-04:00"
+    first_name: "Emily"
+    last_name: "Kelso"
+    email: "emily.kelso@example.com"
+    dob: "1989-03-21"
+    address: "12 Blue Jay Way, Portsmouth, NH, 03021"
+    gender: 2
+    primary_practitioner: 6
+- model: patients.patient
+  pk: 3
+  fields:
+    created_at: "2024-07-25T12:58:05.500072-04:00"
+    updated_at: "2024-07-25T12:58:05.500072-04:00"
+    first_name: "Kelley"
+    last_name: "BlueBook"
+    email: "kelley.bluebook@example.com"
+    dob: "1992-01-02"
+    address: "11 Hoyt Ave, Exeter, NH, 03024"
+    gender: 2
+    primary_practitioner: 5
+- model: patients.patient
+  pk: 4
+  fields:
+    created_at: "2024-07-25T12:58:05.500072-04:00"
+    updated_at: "2024-07-25T12:58:05.500072-04:00"
+    first_name: "Edward"
+    last_name: "Norton"
+    email: "edward.norton@example.com"
+    dob: "1972-01-26"
+    address: "183 Main St, North Conway, NH 03021"
+    gender: 1
+    primary_practitioner: 4
+- model: patients.patient
+  pk: 5
+  fields:
+    created_at: "2024-07-25T12:58:05.500072-04:00"
+    updated_at: "2024-07-25T12:58:05.500072-04:00"
+    first_name: "Ellen"
+    last_name: "Tracy"
+    email: "ellen.tracy@example.com"
+    dob: "1966-12-23"
+    address: "11 Congress St, Hampton Beach, NH, 03020"
+    gender: 2
+    primary_practitioner: 3
+- model: patients.patient
+  pk: 6
+  fields:
+    created_at: "2024-07-25T12:58:05.500072-04:00"
+    updated_at: "2024-07-25T12:58:05.500072-04:00"
+    first_name: "Jonathan"
+    last_name: "Appleseed"
+    email: "jonathan.appleseed@example.com"
+    dob: "1939-01-26"
+    address: "27 W Elm St, Hampton Beach, NH, 03020"
+    gender: 1
+    primary_practitioner: 3
+- model: patients.patient
+  pk: 7
+  fields:
+    created_at: "2024-07-25T12:58:05.500072-04:00"
+    updated_at: "2024-07-25T12:58:05.500072-04:00"
+    first_name: "Robert"
+    last_name: "Downey Jr."
+    email: "robert.downey@example.com"
+    dob: "1970-03-21"
+    address: "17 Congress St, Portland, ME, 04101"
+    gender: 1
+    primary_practitioner: 3
+- model: patients.patient
+  pk: 8
+  fields:
+    created_at: "2024-07-25T12:58:05.500072-04:00"
+    updated_at: "2024-07-25T12:58:05.500072-04:00"
+    first_name: "Elizabeth"
+    last_name: "Bieber"
+    email: "elizabeth.bieber@example.com"
+    dob: "1990-10-18"
+    address: "12 Campbell Rd, Scarborough, ME, 04107"
+    gender: 3
+    primary_practitioner: 2
+- model: patients.patient
+  pk: 9
+  fields:
+    created_at: "2024-07-25T12:58:05.500072-04:00"
+    updated_at: "2024-07-25T12:58:05.500072-04:00"
+    first_name: "Bruce"
+    last_name: "Lee"
+    email: "bruce.lee@example.com"
+    dob: "1948-10-18"
+    address: "11 Scarborough Rd, Los Angeles, CA, 90203"
+    gender: 1
+    primary_practitioner: 1
+  
