@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Index{% endblock %}
+
+{% block content %}
+<ul>
+  {% for patient in patients %}
+    <li>{{patient.first_name}} {{patient.last_name}}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

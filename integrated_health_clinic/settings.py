@@ -57,7 +57,7 @@ ROOT_URLCONF = 'integrated_health_clinic.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/'integrated_health_clinic/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

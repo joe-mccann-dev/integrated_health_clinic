@@ -18,6 +18,13 @@ class Patient(models.Model):
   # set primary practitioner to null if practitioner's id is removed from clinic database
   primary_practitioner = models.ForeignKey('appointments.Practitioner', on_delete=models.SET_NULL, null=True)
 
+  def get_prescription_name(self):
+    try:
+      script_name = Prescription.objects.get(patient = self).name
+    except Prescription.DoesNotExist:
+      script_name = "n/a"
+    return script_name
+
 class InsuranceInfo(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
