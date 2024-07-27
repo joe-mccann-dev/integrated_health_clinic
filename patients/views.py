@@ -1,6 +1,7 @@
-from django.shortcuts import get_object_or_404, render
 from .models import Patient
 from django.views import generic
+from django.views.generic.base import TemplateView
+
 
 class IndexView(generic.ListView):
   template_name = "patients/index.html"
@@ -22,4 +23,5 @@ class DetailView(generic.DetailView):
     context["instructions"] = Patient.get_prescription_instructions(patient)
     return context
   
-
+class NewPatientView(TemplateView):
+  template_name = "patients/new.html"
