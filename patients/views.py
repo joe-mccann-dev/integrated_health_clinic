@@ -2,7 +2,6 @@ from .models import Patient
 from django.views import generic
 from django.views.generic.base import TemplateView
 
-
 class IndexView(generic.ListView):
   template_name = "patients/index.html"
   context_object_name = "patients"
