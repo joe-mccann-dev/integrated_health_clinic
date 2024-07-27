@@ -24,6 +24,13 @@ class Patient(models.Model):
     except Prescription.DoesNotExist:
       script_name = "n/a"
     return script_name
+  
+  def get_prescription_instructions(self):
+    try:
+      instructions = Prescription.objects.get(patient = self).instructions
+    except Prescription.DoesNotExist:
+      instructions = ""
+    return instructions
 
 class InsuranceInfo(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)

@@ -1,13 +1,25 @@
 from django.shortcuts import get_object_or_404, render
-from .models import Patient, Prescription
+from .models import Patient
+from django.views import generic
 
-def index(request):
-  patients =  Patient.objects.all()
-  return render(request, "patients/index.html", {"patients": patients})
+class IndexView(generic.ListView):
+  template_name = "patients/index.html"
+  context_object_name = "patients"
 
+  def get_queryset(self):
+    return Patient.objects.order_by("last_name")
 
-def detail(request, patient_id):
-  p = get_object_or_404(Patient, pk=patient_id)
-  p.gender_display = p.get_gender_display()
-  script_name = Patient.get_prescription_name(p)
-  return render(request, "patients/detail.html", {"patient": p, "script_name": script_name})
+class DetailView(generic.DetailView):
+  model = Patient
+  template_name = "patients/detail.html"
+  context_object_name = "patient"
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    patient = self.get_object()
+    context["gender_display"] = patient.get_gender_display()
+    context["script_name"] = Patient.get_prescription_name(patient)
+    context["instructions"] = Patient.get_prescription_instructions(patient)
+    return context
+  
+
