@@ -1,6 +1,7 @@
 from .models import Patient
 from django.views import generic
 from django.views.generic.base import TemplateView
+from patients.forms import PatientForm
 
 class IndexView(generic.ListView):
   template_name = "patients/index.html"
@@ -24,3 +25,8 @@ class DetailView(generic.DetailView):
   
 class NewPatientView(TemplateView):
   template_name = "patients/new.html"
+
+  def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = PatientForm()
+        return context
