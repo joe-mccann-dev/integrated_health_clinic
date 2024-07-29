@@ -10,7 +10,7 @@ class IndexView(generic.ListView):
   context_object_name = "patients"
 
   def get_queryset(self):
-    return Patient.objects.order_by("last_name")
+    return Patient.objects.order_by("-created_at")
 
 class DetailView(generic.DetailView):
   model = Patient
