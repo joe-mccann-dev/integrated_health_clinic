@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 
 class Gender(models.IntegerChoices):
   MALE = 1
@@ -17,6 +18,9 @@ class Patient(models.Model):
   gender = models.SmallIntegerField(choices=Gender.choices)
   # set primary practitioner to null if practitioner's id is removed from clinic database
   primary_practitioner = models.ForeignKey('appointments.Practitioner', on_delete=models.SET_NULL, null=True)
+
+  def get_absolute_url(self):
+    return reverse("patients:detail", kwargs={"pk": self.pk})
 
   def get_prescription_name(self):
     try:

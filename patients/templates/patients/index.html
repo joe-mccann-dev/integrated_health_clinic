@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>Patients Directory</h2>
-<a href="{% url 'patients:new' %}">Create a new patient</a>
+<a href="{% url 'patients:add' %}">Create a new patient</a>
 <ul>
   {% for patient in patients %}
     <li><a href="{% url 'patients:detail' patient.id %}">{{patient.first_name}} {{patient.last_name}}</a></li>

@@ -1,7 +1,7 @@
 from django.forms import ModelForm, widgets
 from .models import Patient
 
-class PatientForm(ModelForm):
+class AddPatientForm(ModelForm):
   class Meta:
     model = Patient
     widgets = {
