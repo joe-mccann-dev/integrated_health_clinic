@@ -1,9 +1,7 @@
 from .models import Patient
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.views.generic.base import TemplateView
 from patients.forms import AddPatientForm
-from django.forms import widgets
 
 class IndexView(generic.ListView):
   template_name = "patients/index.html"
@@ -28,6 +26,6 @@ class DetailView(generic.DetailView):
 class AddPatientView(CreateView):
   model = Patient
   form_class = AddPatientForm
-  template_name = "patients/add/add.html"
+  template_name = "patients/modify/add.html"
   success_url = '/patients'
   
