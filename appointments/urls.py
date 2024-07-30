@@ -13,4 +13,14 @@ urlpatterns = [
     path(
         "modify/<int:pk>/delete", views.DeleteAppointmentView.as_view(), name="delete"
     ),
+    path(
+        "practitioners/",
+        views.PractitionerIndexView.as_view(),
+        name="practitioner-index",
+    ),
+    path(
+        "practitioners/<int:pk>",
+        views.PractitionerDetailView.as_view(),
+        name="practitioner-detail",
+    ),
 ]
