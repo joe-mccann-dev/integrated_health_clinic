@@ -16,4 +16,5 @@
   <li>Prescription: {{script_name}}</li>
   <li>Prescription Instructions: {{ instructions }}</li>
 </ul>
+<a href="{% url 'patients:delete' patient.id %}">Delete Patient</a>
 {% endblock %}

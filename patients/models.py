@@ -19,6 +19,9 @@ class Patient(models.Model):
   # set primary practitioner to null if practitioner's id is removed from clinic database
   primary_practitioner = models.ForeignKey('appointments.Practitioner', on_delete=models.SET_NULL, null=True)
 
+  def full_name(self):
+    return self.first_name + ' ' +self.last_name
+
   def get_absolute_url(self):
     return reverse("patients:detail", kwargs={"pk": self.pk})
 
