@@ -1,7 +1,7 @@
 from typing import Any
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .models import Appointment, TimeTable, Practitioner
+from .models import Appointment, Availability, TimeTable, Practitioner
 from appointments.forms import AddAppointmentForm
 
 
@@ -32,6 +32,18 @@ class AddAppointmentView(CreateView):
     form_class = AddAppointmentForm
     template_name = "appointments/modify/add.html"
     success_url = "/appointments"
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        availabilities = Availability.objects.order_by('practitioner', 'day')
+        practitioner_availabilities = {}
+        for availability in availabilities:
+            practitioner = availability.practitioner
+            if practitioner not in practitioner_availabilities:
+                practitioner_availabilities[practitioner] = []
+            practitioner_availabilities[practitioner].append(availability.day)
+        context["availabilities"] = practitioner_availabilities
+        return context
 
 
 # view for updating appointment

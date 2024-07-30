@@ -9,4 +9,14 @@
   {% csrf_token %}
   {{ form.as_p }}
   <input type="submit" value="Book Appointment">
+
+<h3>Practitioner Availabilities</h3>
+{% for practitioner, days in availabilities.items %}
+  <p><strong>{{practitioner.full_name}}</strong></p>
+  {% for day in days%}
+    <ul>
+      <li>{{day}}</li>
+    </ul>
+  {% endfor %}
+{% endfor %}
 {% endblock %} 

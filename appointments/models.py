@@ -102,6 +102,8 @@ class Appointment(models.Model):
   def clean(self):
     if self.start_time_interval >= self.end_time_interval:
       raise ValidationError("Start time should be before end time.")
+    if self.day not in Practitioner.get_available_days(self.practitioner):
+      raise ValidationError("Practitioner is available on " + Practitioner.get_available_day_names(self.practitioner) )
     
   def save(self, *args, **options):
     self.clean()

@@ -7,9 +7,9 @@ class AddAppointmentForm(ModelForm):
         model = Appointment
         widgets = {"appointment_date": widgets.DateInput(attrs={"type": "date"})}
         fields = [
+            "practitioner",
             "day",
             "appointment_date",
-            "practitioner",
             "patient",
             "start_time_interval",
             "end_time_interval",
