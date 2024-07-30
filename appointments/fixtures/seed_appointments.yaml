@@ -75,7 +75,7 @@
     start_time_interval: 91
     end_time_interval: 94
 
-# patients 2, 4, and 6 have 2 appointments
+
 - model: appointments.appointment
   fields:
     created_at: "2024-07-29T18:52:43.123463-04:00"
