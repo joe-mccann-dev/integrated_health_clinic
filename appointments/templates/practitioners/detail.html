@@ -14,7 +14,8 @@
     <li>License #: {{ practitioner.license_number }} </li>
     <li>Email: {{ practitioner.email}} </li>
     <li>DOB: {{ practitioner.dob }} {{ practitioner.patient.last_name }}</li>
-    <li>Gender: {{ practitioner.gender }}</li>
+    <li>Gender: {{ gender_display }}</li>
+    <li>Days available: {{ days_available }}</li>
 </ul>
 
 {% endblock %}

@@ -26,6 +26,13 @@ class Practitioner(models.Model):
   practitioner_type = models.CharField(max_length=50, choices=TYPE_CHOICES)
   is_prescriber = models.BooleanField(default=False)
 
+  def get_available_days(self):
+    return Availability.objects.filter(practitioner=self.id)
+
+  def get_available_day_names(self):
+    availabilities = self.get_available_days()
+    days = list(map(lambda a: a.day, availabilities))
+    return ', '.join(str(day) for day in days)
 
 class ChartNote(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)

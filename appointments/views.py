@@ -68,4 +68,6 @@ class PractitionerDetailView(generic.DetailView):
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         practitioner = self.get_object()
+        context["gender_display"] = practitioner.get_gender_display()
+        context["days_available"] = practitioner.get_available_day_names()
         return context
