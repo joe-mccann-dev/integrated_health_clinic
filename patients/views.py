@@ -29,9 +29,14 @@ class AddPatientView(CreateView):
   template_name = "patients/modify/add.html"
   success_url = '/patients'
 
-class UpdatePatientView(CreateView):
+class UpdatePatientView(UpdateView):
   model = Patient
   form_class = AddPatientForm
   template_name = "patients/modify/update.html"
   success_url = '/patients'
+
+class DeletePatientView(DeleteView):
+  model = Patient
+  success_url = '/patients'
+  template_name = "patients/modify/delete.html"
   
