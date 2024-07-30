@@ -1,0 +1,16 @@
+{% extends "base.html" %} 
+{% block title %} 
+Appointments Index 
+{% endblock %} 
+{%block content %}
+<h2>Scheduled Appointments</h2>
+
+{% for appt in appointments %}
+    <li>{{appt.appointment_date}} 
+        <ul>
+            <li> Time: {{appt.start_time_interval}} </li> 
+            <li> {{appt.practitioner}} </li>
+        </ul>
+    </li>
+  {% endfor %}
+{% endblock content %}
