@@ -5,14 +5,10 @@ Appointments Index
 {%block content %}
 <h2>Scheduled Appointments</h2>
 
-<a href="{% url 'appointments:add' %}">Book a new appointment</a>
+<a href="{% url 'appointments:add' %}">Book a new appointment</a> 
+
 
 {% for appt in appointments %}
-<a href="{% url 'appointments:detail' appt.id %}"><li>{{appt.appointment_date}} 
-        <ul>
-            <li>Time: {{appt.start_time}} - {{appt.end_time}}</li>
-            <li> {{appt.practitioner}} </li>
-        </ul>
-    </li> </a>
+<a href="{% url 'appointments:detail' appt.id %}"><li>{{appt.appointment_date}} | Time: {{appt.start_time}} - {{appt.end_time}} | {{appt.practitioner}}</li> </a>
   {% endfor %}
 {% endblock content %}
