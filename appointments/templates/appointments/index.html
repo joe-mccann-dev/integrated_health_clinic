@@ -8,7 +8,8 @@ Appointments Index
 {% for appt in appointments %}
     <li>{{appt.appointment_date}} 
         <ul>
-            <li> Time: {{appt.start_time_interval}} </li> 
+            <li> Start time: {{appt.start_time}}</li>
+            <li> End time: {{appt.end_time}}</li>
             <li> {{appt.practitioner}} </li>
         </ul>
     </li>

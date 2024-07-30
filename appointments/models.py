@@ -72,6 +72,14 @@ class Appointment(models.Model):
   day = models.ForeignKey(Day, on_delete=models.CASCADE)
   start_time_interval = models.SmallIntegerField()
   end_time_interval = models.SmallIntegerField()
+
+  def start_time(self):
+     table_entry = TimeTable.objects.get(time_interval_id = self.start_time_interval)
+     return table_entry.time_value.strftime('%I:%M %p').lstrip('0')
+  
+  def end_time(self):
+    table_entry = TimeTable.objects.get(time_interval_id = self.end_time_interval)
+    return table_entry.time_value.strftime('%I:%M %p').lstrip('0')
     
   def clean(self):
     if self.start_time_interval >= self.end_time_interval:
