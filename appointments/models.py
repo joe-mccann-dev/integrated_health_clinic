@@ -1,6 +1,7 @@
 from django.db import models
 from patients.models import Gender
 from django.core.exceptions import ValidationError
+from datetime import timedelta
 
 class Practitioner(models.Model):
   def __str__(self):
@@ -37,11 +38,21 @@ class ChartNote(models.Model):
 # and ending interval id
 # Ex: 11:00 -> 11:10
 # idea obtained from https://stackoverflow.com/questions/62232148/database-table-design-for-availability-within-time-ranges-per-day
+
+TIME_CHOICES = [(i + 1, str(timedelta(minutes=i * 10))) for i in range(144)]
+# TIME_CHOICES = [
+#   (1, '00:00:00'),
+#   (2, '00:00:10'),
+#   etc...
+# ]
 class TimeTable(models.Model):
-  time_interval_id = models.SmallIntegerField(primary_key=True)
+  time_interval_id = models.SmallIntegerField(primary_key=True, choices=TIME_CHOICES)
   time_value = models.TimeField(default='00:00:00')
 
 class Day(models.Model):
+  def __str__(self): 
+    return self.name
+  
   day_id = models.SmallIntegerField(primary_key=True)
   name = models.CharField(max_length=10)
 
@@ -50,8 +61,8 @@ class Availability(models.Model):
   practitioner = models.ForeignKey('appointments.Practitioner', on_delete=models.CASCADE)
   # if day deleted, remove all availability entries for that day
   day = models.ForeignKey(Day, on_delete=models.CASCADE)
-  start_time_interval = models.SmallIntegerField()
-  end_time_interval = models.SmallIntegerField()
+  start_time_interval = models.SmallIntegerField(choices=TIME_CHOICES)
+  end_time_interval = models.SmallIntegerField(choices=TIME_CHOICES)
 
   def clean(self):
     if self.start_time_interval >= self.end_time_interval:
@@ -70,8 +81,8 @@ class Appointment(models.Model):
   patient = models.ForeignKey('patients.Patient', on_delete=models.CASCADE)
   appointment_date = models.DateField(db_index=True)
   day = models.ForeignKey(Day, on_delete=models.CASCADE)
-  start_time_interval = models.SmallIntegerField()
-  end_time_interval = models.SmallIntegerField()
+  start_time_interval = models.SmallIntegerField(choices=TIME_CHOICES)
+  end_time_interval = models.SmallIntegerField(choices=TIME_CHOICES)
 
   def start_time(self):
      table_entry = TimeTable.objects.get(time_interval_id = self.start_time_interval)

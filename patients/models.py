@@ -8,6 +8,9 @@ class Gender(models.IntegerChoices):
   NON_BINARY = 3
 
 class Patient(models.Model):
+  def __str__(self):
+    return self.full_name()
+  
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
   first_name = models.CharField(max_length=100, db_index=True)
