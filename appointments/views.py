@@ -1,16 +1,53 @@
 # from django.shortcuts import render
-from django.views.generic import ListView
+# from django.http import HttpResponse
+from typing import Any
+from django.db.models.query import QuerySet
+from django.views import generic
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import Appointment, TimeTable
+from appointments.forms import AddAppointmentForm
 
 
-# def index(request):
-#     return HttpResponse("hello, world. updating")
-
-
-class AppointmentListView(ListView):
-    model = Appointment
+# initial view on load:
+class IndexView(generic.ListView):
     template_name = "appointments/index.html"
     context_object_name = "appointments"
 
     def get_queryset(self):
         return Appointment.objects.order_by("appointment_date")
+
+
+# secondary view on appointment click:
+class DetailView(generic.DetailView):
+    model = Appointment
+    template_name = "appointments/detail.html"
+    context_object_name = "appointment"
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        appointment = self.get_object()
+        return context
+
+
+# view for adding appointment
+class AddAppointmentView(CreateView):
+    model = Appointment
+    form_class = AddAppointmentForm
+    template_name = "appointments/modify/add.html"
+    success_url = "/appointments"
+
+
+# view for updating appointment
+class UpdateAppointmentView(UpdateView):
+    model = Appointment
+    form_class = AddAppointmentForm
+    template_name = "appointments/modify/update.html"
+    success_url = "/appointments"
+
+
+# view for deleting appointment
+class DeleteAppointmentView(DeleteView):
+    model = Appointment
+    template_name = "appointments/modify/delete.html"
+    success_url = "/appointments"
+    context_object_name = "appointment"

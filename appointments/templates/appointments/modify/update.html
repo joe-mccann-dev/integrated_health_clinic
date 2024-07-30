@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Update Appointment Details{% endblock %}
+
+{% block content %}
+<h2>Update Appointment Form</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Update Appointment"> 
+{% endblock %}

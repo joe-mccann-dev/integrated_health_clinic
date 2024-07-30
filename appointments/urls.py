@@ -2,6 +2,15 @@ from django.urls import path
 
 from . import views
 
+# register the name space
+app_name = "appointments"
+
 urlpatterns = [
-    path("", views.AppointmentListView.as_view(), name="index"),
+    path("", views.IndexView.as_view(), name="index"),
+    path("<int:pk>/", views.DetailView.as_view(), name="detail"),
+    path("modify/", views.AddAppointmentView.as_view(), name="add"),
+    path("modify/<int:pk>/", views.UpdateAppointmentView.as_view(), name="update"),
+    path(
+        "modify/<int:pk>/delete", views.DeleteAppointmentView.as_view(), name="delete"
+    ),
 ]
