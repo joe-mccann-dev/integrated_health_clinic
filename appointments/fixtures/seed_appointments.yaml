@@ -6,8 +6,8 @@
     patient: 2
     appointment_date: "2024-07-30"
     day: 1
-    start_time_interval: 900
-    end_time_interval: 930
+    start_time_interval: 55
+    end_time_interval: 58
 
 - model: appointments.appointment
   fields:
@@ -17,8 +17,8 @@
     patient: 4
     appointment_date: "2024-07-31"
     day: 2
-    start_time_interval: 1000
-    end_time_interval: 1030
+    start_time_interval: 61
+    end_time_interval: 64
 
 - model: appointments.appointment
   fields:
@@ -28,8 +28,8 @@
     patient: 5
     appointment_date: "2024-08-01"
     day: 3
-    start_time_interval: 1000
-    end_time_interval: 1030
+    start_time_interval: 61
+    end_time_interval: 64
 
 - model: appointments.appointment
   fields:
@@ -39,8 +39,8 @@
     patient: 6
     appointment_date: "2024-08-02"
     day: 4
-    start_time_interval: 1200
-    end_time_interval: 1230
+    start_time_interval: 73
+    end_time_interval: 76
 
 - model: appointments.appointment
   fields:
@@ -50,8 +50,8 @@
     patient: 7
     appointment_date: "2024-08-03"
     day: 5
-    start_time_interval: 1300
-    end_time_interval: 1330
+    start_time_interval: 79
+    end_time_interval: 82
 
 - model: appointments.appointment
   fields:
@@ -61,8 +61,8 @@
     patient: 8
     appointment_date: "2024-08-04"
     day: 6
-    start_time_interval: 1400
-    end_time_interval: 1430
+    start_time_interval: 85
+    end_time_interval: 88
 
 - model: appointments.appointment
   fields:
@@ -72,8 +72,8 @@
     patient: 9
     appointment_date: "2024-08-05"
     day: 7
-    start_time_interval: 1500
-    end_time_interval: 1530
+    start_time_interval: 91
+    end_time_interval: 94
 
 # patients 2, 4, and 6 have 2 appointments
 - model: appointments.appointment
@@ -84,8 +84,8 @@
     patient: 2
     appointment_date: "2024-08-02"
     day: 1
-    start_time_interval: 1600
-    end_time_interval: 1630
+    start_time_interval: 97
+    end_time_interval: 100
 
 - model: appointments.appointment
   fields:
@@ -95,8 +95,8 @@
     patient: 4
     appointment_date: "2024-08-04"
     day: 2
-    start_time_interval: 1130
-    end_time_interval: 1160  # Adjusted for 30 min gap
+    start_time_interval: 70
+    end_time_interval: 73
 
 - model: appointments.appointment
   fields:
@@ -106,5 +106,5 @@
     patient: 6
     appointment_date: "2024-08-01"
     day: 3
-    start_time_interval: 1230
-    end_time_interval: 1260  # Adjusted for 30 min gap
+    start_time_interval: 76
+    end_time_interval: 79 

@@ -1,8 +1,6 @@
 # from django.shortcuts import render
-from django.db.models.query import QuerySet
-from django.http import HttpResponse
 from django.views.generic import ListView
-from .models import Appointment
+from .models import Appointment, TimeTable
 
 
 # def index(request):
