@@ -51,7 +51,7 @@ class Practitioner(models.Model):
       if availability not in days_dict:
         start = TimeTable.objects.get(time_interval_id = availability.start_time_interval).time_value
         end = TimeTable.objects.get(time_interval_id = availability.end_time_interval).time_value
-        days_dict[availability.day] = (start, end)
+        days_dict[availability.day] = (start.strftime('%H:%M'), end.strftime('%H:%M'))
     
     return days_dict
 
