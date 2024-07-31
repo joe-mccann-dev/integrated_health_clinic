@@ -34,14 +34,9 @@ class AddAppointmentView(CreateView):
     template_name = "appointments/modify/add.html"
     success_url = "/appointments"
 
-    def get_form(self, form_class=None):
-         form = super().get_form( form_class)
-         form.fields['day'].widget = forms.HiddenInput()
-         return form
-
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
-        availabilities = Availability.objects.order_by('practitioner', 'day')
+        availabilities = Availability.objects.order_by('practitioner')
         practitioner_availabilities = {}
         for availability in availabilities:
             practitioner = availability.practitioner

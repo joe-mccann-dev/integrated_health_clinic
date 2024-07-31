@@ -128,15 +128,13 @@ class Appointment(models.Model):
     table_entry = TimeTable.objects.get(time_interval_id = self.end_time_interval)
     return table_entry.time_value.strftime('%I:%M %p').lstrip('0')
   
-  # TODO: figure out how to set self.day in save() <-- currently throwing error
   def clean(self):
-    # weekday() counts Monday as 0, here it equals 1
+    # dateime.weekday() counts Monday as 0, in this app it equals 1
     day_id = self.appointment_date.weekday() + 1
-    self.day = Day(day_id = day_id, 
-                   name = Day.objects.get(day_id = day_id))
     available_day_objects = Practitioner.get_available_day_objects(self.practitioner)
+    day = Day.objects.get(day_id=day_id)
 
-    if self.day not in Practitioner.get_available_day_objects(self.practitioner):
+    if day not in Practitioner.get_available_day_objects(self.practitioner):
       raise ValidationError("Practitioner is available on " + Practitioner.get_available_day_names(self.practitioner))
     
     self.validate_appointment_intervals()
@@ -165,5 +163,8 @@ class Appointment(models.Model):
       raise ValidationError(f"{availability.practitioner} is available through {available_end_time}")
     
   def save(self, *args, **options):
+    day_id = self.appointment_date.weekday() + 1
+    self.day = Day(day_id = day_id, 
+                   name = Day.objects.get(day_id = day_id))
     self.clean()
     super().save(*args, **options)
