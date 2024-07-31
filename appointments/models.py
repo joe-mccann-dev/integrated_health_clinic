@@ -122,11 +122,11 @@ class Appointment(models.Model):
 
   def start_time(self):
      table_entry = TimeTable.objects.get(time_interval_id = self.start_time_interval)
-     return table_entry.time_value.strftime('%I:%M %p').lstrip('0')
+     return table_entry.time_value.strftime("%H:%M")
   
   def end_time(self):
     table_entry = TimeTable.objects.get(time_interval_id = self.end_time_interval)
-    return table_entry.time_value.strftime('%I:%M %p').lstrip('0')
+    return table_entry.time_value.strftime("%H:%M")
   
   def clean(self):
     # dateime.weekday() counts Monday as 0, in this app it equals 1
@@ -137,6 +137,7 @@ class Appointment(models.Model):
     if day not in Practitioner.get_available_day_objects(self.practitioner):
       raise ValidationError("Practitioner is available on " + Practitioner.get_available_day_names(self.practitioner))
     
+    self.validate_appointment_available()
     self.validate_appointment_intervals()
 
     for day in available_day_objects:
@@ -161,6 +162,19 @@ class Appointment(models.Model):
     if self.end_time_interval > availability.end_time_interval:
       available_end_time = TimeTable.objects.get(time_interval_id=availability.end_time_interval)
       raise ValidationError(f"{availability.practitioner} is available through {available_end_time}")
+  
+  # prevent the scheduling an already booked appointment
+  def validate_appointment_available(self):
+    practitioner = self.practitioner
+    desired_appt_date = self.appointment_date
+    prac_appts_on_desired_appt_date = practitioner.current_appointments_by_date(desired_appt_date)
+    for appt in prac_appts_on_desired_appt_date:
+      start_interval = appt.start_time_interval
+      end_interval = appt.end_time_interval
+      if self.start_time_interval in range(start_interval, end_interval + 1):
+        raise ValidationError(f"Desired appointment starts during another appointment. {practitioner} already has an appointment from {appt.start_time()} to {appt.end_time()}")
+      if self.end_time_interval in range(start_interval, end_interval + 1):
+        raise ValidationError(f"Desired appointment runs into another appointment. {practitioner} has an appointment from {appt.start_time()} to {appt.end_time()}")
     
   def save(self, *args, **options):
     day_id = self.appointment_date.weekday() + 1
