@@ -3,23 +3,26 @@
 {% block title %}Schedule an Appointment{% endblock %}
 
 {% block content %}
-<a href="{% url 'appointments:index' %}">Appointments Index</a>
 <h2>Schedule an Appointment Form</h2>
 
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" value="Book Appointment">
-
-<h3>Practitioner Availabilities</h3>
-{% for practitioner, days_with_times in availabilities.items %}
-  <p><strong>{{practitioner}}</strong></p>
-
+<div class="new-appt-container">
+  <div class="new-appt-form">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+    <input type="submit" value="Book Appointment">
+  </div>
+  <div class="new-appt-avails">
+    <h3>Practitioner Availabilities</h3>
+    {% for practitioner, days_with_times in availabilities.items %}
+    <p><strong>{{practitioner}}</strong></p>
     <ul>
       {% for day, times in days_with_times.items %}
-        <li>{{day}}: <span>{{times.0}} - {{times.1}}</span></li>
+      <li>{{day}}: <span>{{times.0}} - {{times.1}}</span></li>
       {% endfor%}
     </ul>
+  {% endfor %}
+  </div>
+</div>
 
-{% endfor %}
 {% endblock %} 

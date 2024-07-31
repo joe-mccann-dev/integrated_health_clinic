@@ -3,9 +3,11 @@
 {% block title %}Patient Detail{% endblock %}
 
 {% block content %}
-<a href="{% url 'patients:index' %}">Patients Directory</a>
 <h2>Viewing Patient with ID {{patient.id}}:</h2>
-<a href="{% url 'patients:update' patient.id %}">Update Patient Info</a>
+<nav>
+  <a href="{% url 'patients:update' patient.id %}">Update Patient Info</a>
+  <a href="{% url 'patients:delete' patient.id %}">Delete Patient</a>
+</nav>
 <ul>
   <li>Name: {{ patient.first_name }} {{ patient.last_name }}</li>
   <li>Email: {{ patient.email }}</li>
@@ -16,5 +18,4 @@
   <li>Prescription: {{script_name}}</li>
   <li>Prescription Instructions: {{ instructions }}</li>
 </ul>
-<a href="{% url 'patients:delete' patient.id %}">Delete Patient</a>
 {% endblock %}

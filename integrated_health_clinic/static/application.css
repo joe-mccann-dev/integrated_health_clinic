@@ -1,0 +1,104 @@
+/* root colors from https://tailwindcss.com/docs/customizing-colors */
+
+:root {
+  --slate-100: #f1f5f9;
+  --slate-500: #64748b;
+  --slate-800: #1e293b;
+  --indigo-500: #6366f1;
+}
+
+html {
+  box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  color: var(--slate-800);
+  background-color: var(--slate-100);
+  margin: 24px;
+  padding: 24px;
+}
+
+#content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+form p {
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  width: 300px;
+}
+
+p select, date {
+  padding: 4px;
+  margin: 4px 0;
+}
+
+input[type=date], input[type=text], input[type=email] {
+  padding: 4px;
+  margin: 4px 0;
+} 
+
+input[type=submit] {
+  margin: 12px 0;
+  padding: 12px;
+  background-color: var(--slate-500);
+  color: var(--slate-100);
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+a:link { 
+  color: var(--indigo-500);
+  text-decoration: none; 
+} 
+a:visited { 
+  text-decoration: none; 
+} 
+
+a:hover {
+  text-decoration: underline;
+}
+
+li:hover {
+  list-style-type: square;
+}
+
+.new-appt-container {
+  display: flex;
+  gap: 100px;
+  flex-wrap: wrap;
+}
+
+.new-appt-avails {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.new-appt-avails ul {
+  flex-direction: column;
+  align-items: space-between;
+}
