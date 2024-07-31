@@ -4,16 +4,6 @@ from django.core.exceptions import ValidationError
 from datetime import timedelta
 
 class Practitioner(models.Model):
-  def __str__(self):
-    return self.full_name + ', ' + self.practitioner_type
-    
-  created_at = models.DateTimeField(auto_now_add=True)
-  updated_at = models.DateTimeField(auto_now=True)
-  full_name = models.CharField(max_length=200, db_index=True)
-  email = models.EmailField(max_length=200, unique=True)
-  gender = models.SmallIntegerField(choices=Gender.choices)
-  dob = models.DateField()
-  license_number = models.CharField(max_length=50)
   TYPE_CHOICES = [
     ('physician', 'Physician'),
     ('nurse_practitioner', 'Nurse Practitioner'),
@@ -23,8 +13,20 @@ class Practitioner(models.Model):
     ('acupuncturist', 'Acupuncturist'),
     ('massage_therapist', 'Massage Therapist'),
   ]
+  TYPE_CHOICES_DICT = {key: value for key, value in TYPE_CHOICES}
+  
+  created_at = models.DateTimeField(auto_now_add=True)
+  updated_at = models.DateTimeField(auto_now=True)
+  full_name = models.CharField(max_length=200, db_index=True)
+  email = models.EmailField(max_length=200, unique=True)
+  gender = models.SmallIntegerField(choices=Gender.choices)
+  dob = models.DateField()
+  license_number = models.CharField(max_length=50)
   practitioner_type = models.CharField(max_length=50, choices=TYPE_CHOICES)
   is_prescriber = models.BooleanField(default=False)
+
+  def __str__(self):
+    return self.full_name + ', ' + self.TYPE_CHOICES_DICT[self.practitioner_type]
 
   def get_availablities(self):
     return Availability.objects.filter(practitioner=self.id)
