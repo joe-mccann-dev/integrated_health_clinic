@@ -3,6 +3,9 @@ from .models import Appointment
 
 
 class AddAppointmentForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(AddAppointmentForm, self).__init__(*args, **kwargs)
+        self.fields['day'].required = False
     class Meta:
         model = Appointment
         widgets = {"appointment_date": widgets.DateInput(attrs={"type": "date"})}

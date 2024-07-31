@@ -1,9 +1,10 @@
 from typing import Any
+from django import forms
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import Appointment, Availability, TimeTable, Practitioner
 from appointments.forms import AddAppointmentForm
-
+from datetime import date
 
 # initial view on load:
 class IndexView(generic.ListView):
@@ -33,6 +34,11 @@ class AddAppointmentView(CreateView):
     template_name = "appointments/modify/add.html"
     success_url = "/appointments"
 
+    def get_form(self, form_class=None):
+         form = super().get_form( form_class)
+         form.fields['day'].widget = forms.HiddenInput()
+         return form
+
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         availabilities = Availability.objects.order_by('practitioner', 'day')
@@ -42,7 +48,6 @@ class AddAppointmentView(CreateView):
             if practitioner not in practitioner_availabilities:
                 avail_times_by_day = practitioner.get_available_times_by_day()
                 practitioner_availabilities[practitioner] = avail_times_by_day
-            # practitioner_availabilities[practitioner].append()
         context["availabilities"] = practitioner_availabilities
         return context
 

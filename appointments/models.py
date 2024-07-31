@@ -56,6 +56,9 @@ class Practitioner(models.Model):
         days_dict[availability.day] = (start.strftime('%H:%M'), end.strftime('%H:%M'))
     
     return days_dict
+  
+  def current_appointments_by_date(self, appointment_date):
+    return Appointment.objects.filter(practitioner=self, appointment_date=appointment_date)
 
 class ChartNote(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)
@@ -125,18 +128,19 @@ class Appointment(models.Model):
     table_entry = TimeTable.objects.get(time_interval_id = self.end_time_interval)
     return table_entry.time_value.strftime('%I:%M %p').lstrip('0')
   
-  def start_range(self):
-    return False
-  
+  # TODO: figure out how to set self.day in save() <-- currently throwing error
   def clean(self):
-    available_day_objects = Practitioner.get_available_day_objects(self.practitioner)
-    day_id = self.day.day_id
     # weekday() counts Monday as 0, here it equals 1
-    if day_id != (self.appointment_date.weekday() + 1):
-      raise ValidationError("Day and date don't match")
+    day_id = self.appointment_date.weekday() + 1
+    self.day = Day(day_id = day_id, 
+                   name = Day.objects.get(day_id = day_id))
+    available_day_objects = Practitioner.get_available_day_objects(self.practitioner)
+
     if self.day not in Practitioner.get_available_day_objects(self.practitioner):
       raise ValidationError("Practitioner is available on " + Practitioner.get_available_day_names(self.practitioner))
+    
     self.validate_appointment_intervals()
+
     for day in available_day_objects:
       if day.day_id == day_id:
         availability = Availability.objects.get(practitioner = self.practitioner, day = day_id)
