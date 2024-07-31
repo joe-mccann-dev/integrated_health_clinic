@@ -70,12 +70,17 @@ ul {
   gap: 4px;
 }
 
-a:link { 
+a {
   color: var(--indigo-500);
-  text-decoration: none; 
+}
+
+a:link { 
+  text-decoration: none;
+  color: var(--indigo-500);
 } 
 a:visited { 
-  text-decoration: none; 
+  text-decoration: none;
+  color: var(--indigo-500);
 } 
 
 a:hover {
