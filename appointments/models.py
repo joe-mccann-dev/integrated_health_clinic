@@ -14,7 +14,7 @@ class Practitioner(models.Model):
     ('massage_therapist', 'Massage Therapist'),
   ]
   TYPE_CHOICES_DICT = {key: value for key, value in TYPE_CHOICES}
-  
+
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
   full_name = models.CharField(max_length=200, db_index=True)
@@ -129,13 +129,36 @@ class Appointment(models.Model):
     return False
   
   def clean(self):
-    if self.start_time_interval >= self.end_time_interval:
-      raise ValidationError("Start time should be before end time.")
+    available_day_objects = Practitioner.get_available_day_objects(self.practitioner)
+    day_id = self.day.day_id
     # weekday() counts Monday as 0, here it equals 1
-    if self.day.day_id != (self.appointment_date.weekday() + 1):
+    if day_id != (self.appointment_date.weekday() + 1):
       raise ValidationError("Day and date don't match")
     if self.day not in Practitioner.get_available_day_objects(self.practitioner):
       raise ValidationError("Practitioner is available on " + Practitioner.get_available_day_names(self.practitioner))
+    self.validate_appointment_intervals()
+    for day in available_day_objects:
+      if day.day_id == day_id:
+        availability = Availability.objects.get(practitioner = self.practitioner, day = day_id)
+        self.validate_appointment_time_range(availability)
+
+  def validate_appointment_intervals(self):
+    start_interval = self.start_time_interval
+    end_interval = self.end_time_interval
+    if start_interval >= end_interval:
+      raise ValidationError("Start time should be before end time.")
+    if end_interval - start_interval < 3:
+      raise ValidationError("Appointments are a minimum of 30 minutes")
+    if end_interval - start_interval > 9:
+      raise ValidationError("Appointments are a maxium of 90 minutes")
+    
+  def validate_appointment_time_range(self, availability):
+    if self.start_time_interval < availability.start_time_interval:
+      available_start_time = TimeTable.objects.get(time_interval_id=availability.start_time_interval)
+      raise ValidationError(f"{availability.practitioner} is not available until {available_start_time}")
+    if self.end_time_interval > availability.end_time_interval:
+      available_end_time = TimeTable.objects.get(time_interval_id=availability.end_time_interval)
+      raise ValidationError(f"{availability.practitioner} is available through {available_end_time}")
     
   def save(self, *args, **options):
     self.clean()
