@@ -26,16 +26,26 @@ class Practitioner(models.Model):
   practitioner_type = models.CharField(max_length=50, choices=TYPE_CHOICES)
   is_prescriber = models.BooleanField(default=False)
 
-  def get_available_days(self):
+  def get_availablities(self):
     return Availability.objects.filter(practitioner=self.id)
+  
+  def get_available_day_objects(self):
+    availabilities = self.get_availablities()
+    day_query_set = map(lambda a: a.day, availabilities)
+    return day_query_set
+  
+  def get_available_day_ids(self):
+    day_objects = self.get_available_day_objects()
+    day_ids = list(map(lambda day_obj: day_obj.day_id, day_objects))
+    return day_ids
 
   def get_available_day_names(self):
-    availabilities = self.get_available_days()
+    availabilities = self.get_availablities()
     days = list(map(lambda a: a.day, availabilities))
     return ', '.join(str(day) for day in days)
   
   def get_available_times_by_day(self):
-    availabilities = self.get_available_days()
+    availabilities = self.get_availablities()
     days_dict = {}
     for availability in availabilities:
       if availability not in days_dict:
@@ -112,12 +122,18 @@ class Appointment(models.Model):
   def end_time(self):
     table_entry = TimeTable.objects.get(time_interval_id = self.end_time_interval)
     return table_entry.time_value.strftime('%I:%M %p').lstrip('0')
-    
+  
+  def start_range(self):
+    return False
+  
   def clean(self):
     if self.start_time_interval >= self.end_time_interval:
       raise ValidationError("Start time should be before end time.")
-    if self.day not in Practitioner.get_available_days(self.practitioner):
-      raise ValidationError("Practitioner is available on " + Practitioner.get_available_day_names(self.practitioner) )
+    # weekday() counts Monday as 0, here it equals 1
+    if self.day.day_id != (self.appointment_date.weekday() + 1):
+      raise ValidationError("Day and date don't match")
+    if self.day not in Practitioner.get_available_day_objects(self.practitioner):
+      raise ValidationError("Practitioner is available on " + Practitioner.get_available_day_names(self.practitioner))
     
   def save(self, *args, **options):
     self.clean()
