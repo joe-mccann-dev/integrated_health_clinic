@@ -11,12 +11,14 @@
   <input type="submit" value="Book Appointment">
 
 <h3>Practitioner Availabilities</h3>
-{% for practitioner, days in availabilities.items %}
+{% for practitioner, days_with_times in availabilities.items %}
   <p><strong>{{practitioner.full_name}}</strong></p>
-  {% for day in days%}
+
     <ul>
-      <li>{{day}}</li>
+      {% for day, times in days_with_times.items %}
+        <li>{{day}}: <span>{{times.0}} - {{times.1}}</span></li>
+      {% endfor%}
     </ul>
-  {% endfor %}
+
 {% endfor %}
 {% endblock %} 

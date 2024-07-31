@@ -40,8 +40,9 @@ class AddAppointmentView(CreateView):
         for availability in availabilities:
             practitioner = availability.practitioner
             if practitioner not in practitioner_availabilities:
-                practitioner_availabilities[practitioner] = []
-            practitioner_availabilities[practitioner].append(availability.day)
+                avail_times_by_day = practitioner.get_available_times_by_day()
+                practitioner_availabilities[practitioner] = avail_times_by_day
+            # practitioner_availabilities[practitioner].append()
         context["availabilities"] = practitioner_availabilities
         return context
 

@@ -33,6 +33,17 @@ class Practitioner(models.Model):
     availabilities = self.get_available_days()
     days = list(map(lambda a: a.day, availabilities))
     return ', '.join(str(day) for day in days)
+  
+  def get_available_times_by_day(self):
+    availabilities = self.get_available_days()
+    days_dict = {}
+    for availability in availabilities:
+      if availability not in days_dict:
+        start = TimeTable.objects.get(time_interval_id = availability.start_time_interval).time_value
+        end = TimeTable.objects.get(time_interval_id = availability.end_time_interval).time_value
+        days_dict[availability.day] = (start, end)
+    
+    return days_dict
 
 class ChartNote(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)
@@ -53,6 +64,9 @@ TIME_CHOICES = [(i + 1, str(timedelta(minutes=i * 10))) for i in range(144)]
 #   etc...
 # ]
 class TimeTable(models.Model):
+  def __str__(self):
+    return f"{self.time_value}"
+  
   time_interval_id = models.SmallIntegerField(primary_key=True, choices=TIME_CHOICES)
   time_value = models.TimeField(default='00:00:00')
 
