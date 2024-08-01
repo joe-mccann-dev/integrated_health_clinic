@@ -13,10 +13,16 @@
         </a>
     </li>
     <li>Practitioner: <a href="{% url 'appointments:practitioner-detail' appointment.practitioner.id  %}">{{ appointment.practitioner }}</a></li>
+    {% if chartnote.id %}
     <li>
         Appointment Chart Notes:
-       <a href="{% url 'appointments:appointment-chartnote' chartnote.id %}">Chart Note for {{appointment.patient.first_name}} {{appointment.patient.last_name}}</a>
+        <a href="{% url 'appointments:appointment-chartnote' chartnote.id %}">
+            Chart Note for {{appointment.patient.first_name}} {{appointment.patient.last_name}}
+        </a>
+    
     </li>
+        
+    {% endif %}
 </ul>
 <nav>
     <a href="{% url 'appointments:update' appointment.id %}">Update Appointment</a>

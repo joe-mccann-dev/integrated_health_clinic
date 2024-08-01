@@ -26,7 +26,7 @@ class Practitioner(models.Model):
   is_prescriber = models.BooleanField(default=False)
 
   def __str__(self):
-    return self.full_name + ', ' + self.TYPE_CHOICES_DICT[self.practitioner_type]
+    return self.TYPE_CHOICES_DICT[self.practitioner_type] + ' | ' + self.full_name 
 
   def get_availablities(self):
     return Availability.objects.filter(practitioner=self.id)
@@ -120,6 +120,13 @@ class Appointment(models.Model):
   day = models.ForeignKey(Day, on_delete=models.CASCADE)
   start_time_interval = models.SmallIntegerField(choices=TIME_CHOICES)
   end_time_interval = models.SmallIntegerField(choices=TIME_CHOICES)
+
+  def get_chart_note(self):
+    try:
+      chart_note = ChartNote.objects.get(appointment = self)
+    except:
+      chart_note = ChartNote(appointment=self)
+    return chart_note
 
   def start_time(self):
      table_entry = TimeTable.objects.get(time_interval_id = self.start_time_interval)

@@ -35,7 +35,7 @@ class DetailView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         appointment = self.get_object()
         # retrieves chart note from individual appointment
-        context["chartnote"] = ChartNote.objects.get(appointment = appointment)
+        context["chartnote"] = appointment.get_chart_note()
         return context
 
 
@@ -81,7 +81,7 @@ class PractitionerIndexView(generic.ListView):
     context_object_name = "practitioners"
 
     def get_queryset(self):
-        return Practitioner.objects.order_by("full_name")
+        return Practitioner.objects.order_by("practitioner_type", "full_name")
 
 
 # secondary view on practitioner click:
@@ -97,6 +97,9 @@ class PractitionerDetailView(generic.DetailView):
         context["days_available"] = practitioner.get_available_day_names()
         return context
     
+#  === chart views ==
+
+# view all of a practitioner's completed chart notes
 class PractitionerChartsView(generic.DetailView):
     model = Practitioner
     template_name = "practitioners/notes/chartnotes.html"
@@ -110,7 +113,8 @@ class PractitionerChartsView(generic.DetailView):
         context["notes"] = ChartNote.objects.filter(appointment__in=appointments)
         context["practitioner"] = practitioner
         return context
-    
+
+# view individual chart note associated with an appointment
 class AppointmentChartView(generic.DetailView):
     model = ChartNote
     template_name = "appointments/notes/chartnote.html"
