@@ -59,7 +59,7 @@ class Patient(models.Model):
 class InsuranceInfo(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
-  patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+  patient = models.OneToOneField(Patient, on_delete=models.CASCADE)
   provider = models.CharField(max_length=50)
   member_id = models.CharField(max_length=50)
 
