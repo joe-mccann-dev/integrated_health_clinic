@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from patients.models import Gender
 from django.core.exceptions import ValidationError
 from datetime import timedelta, date
@@ -77,6 +78,9 @@ class ChartNote(models.Model):
   def save(self, *args, **options):
     self.clean()
     super().save(*args, **options)
+
+  def get_absolute_url(self):
+    return reverse("appointments:detail", kwargs={"pk": self.appointment.pk})
 
 # represent availability blocks with starting interval id
 # and ending interval id

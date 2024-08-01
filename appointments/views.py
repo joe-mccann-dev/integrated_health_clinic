@@ -63,7 +63,7 @@ class AddChartNoteView(CreateView):
     model = ChartNote
     form_class = AddChartNoteForm
     template_name = "appointments/notes/add.html"
-    success_url = "/appointments"
+    # success_url = "/appointments"
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
