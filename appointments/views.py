@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .models import Appointment, Availability, ChartNote, Practitioner
+from appointments.models import Appointment, Availability, ChartNote, Day, Practitioner
 from appointments.forms import AddAppointmentForm, AddChartNoteForm
 
 # initial view on load:
@@ -59,6 +59,14 @@ class AddAppointmentView(CreateView):
                 practitioner_availabilities[practitioner] = avail_times_by_day
         context["availabilities"] = practitioner_availabilities
         return context
+    
+    # day_id = self.appointment_date.weekday() + 1
+    # self.day = Day(day_id = day_id, 
+    # name = Day.objects.get(day_id = day_id))
+    def form_valid(self, form):
+        day_id = form.instance.appointment_date.weekday() + 1
+        form.instance.day = Day(day_id)
+        return super().form_valid(form)
     
 class AddChartNoteView(CreateView):
     model = ChartNote

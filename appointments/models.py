@@ -203,8 +203,5 @@ class Appointment(models.Model):
         raise ValidationError(f"Desired appointment runs into another appointment. {practitioner} has an appointment from {appt.start_time()} to {appt.end_time()}")
     
   def save(self, *args, **options):
-    day_id = self.appointment_date.weekday() + 1
-    self.day = Day(day_id = day_id, 
-                   name = Day.objects.get(day_id = day_id))
     self.clean()
     super().save(*args, **options)
