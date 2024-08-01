@@ -60,9 +60,6 @@ class AddAppointmentView(CreateView):
         context["availabilities"] = practitioner_availabilities
         return context
     
-    # day_id = self.appointment_date.weekday() + 1
-    # self.day = Day(day_id = day_id, 
-    # name = Day.objects.get(day_id = day_id))
     def form_valid(self, form):
         day_id = form.instance.appointment_date.weekday() + 1
         form.instance.day = Day(day_id)

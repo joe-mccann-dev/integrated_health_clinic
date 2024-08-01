@@ -4,7 +4,9 @@ Appointments Index
 {% endblock %} 
 {%block content %}
 <h2>Scheduled Appointments</h2>
-
+<nav>
+  <a href="{% url 'appointments:add' %}">Book a New Appointment</a>
+</nav>
 <ul class="appt-list">
 {% for appt in appointments %}
 <li>

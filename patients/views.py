@@ -1,8 +1,10 @@
+from typing import Any
+from django.shortcuts import get_object_or_404
 from appointments.models import Appointment, ChartNote
-from patients.models import InsuranceInfo, Patient
+from patients.models import InsuranceInfo, Patient, Prescription
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from patients.forms import AddPatientForm
+from patients.forms import AddPatientForm, AddPatientPrescriptionForm
 
 class IndexView(generic.ListView):
   template_name = "patients/index.html"
@@ -20,8 +22,7 @@ class DetailView(generic.DetailView):
     context = super().get_context_data(**kwargs)
     patient = self.get_object()
     context["gender_display"] = patient.get_gender_display()
-    context["script_name"] = Patient.get_prescription_name(patient)
-    context["instructions"] = Patient.get_prescription_instructions(patient)
+    context["prescriptions"] = Patient.get_prescriptions(patient)
     context["insurance_provider"] = patient.get_insurance_provider()
     context["insurance_member_id"] = patient.get_insurance_member_id()
 
@@ -59,4 +60,39 @@ class DeletePatientView(DeleteView):
   model = Patient
   success_url = '/patients'
   template_name = "patients/modify/delete.html"
+
+class AddPatientPrescriptionView(CreateView):
+  model = Prescription
+  form_class = AddPatientPrescriptionForm
+  template_name = "patients/prescriptions/add.html"
+
+  def get_initial(self):
+      initial = super().get_initial()
+      patient_id = self.kwargs.get("patient_id")
+      initial["patient"] = get_object_or_404(Patient, pk=patient_id)
+        
+      return initial
+  
+  def get_context_data(self, **kwargs : Any):
+    context = super().get_context_data(**kwargs)
+    patient_id = self.kwargs.get("patient_id")
+    context["patient"] = get_object_or_404(Patient, pk=patient_id)
+
+    return context
+    
+  def form_valid(self, form):
+      form.instance.patient = get_object_or_404(Patient, pk=self.kwargs.get("patient_id"))
+      return super().form_valid(form)
+  
+class DeletePatientPrescriptionView(DeleteView):
+    model = Prescription
+    template_name = "patients/prescriptions/delete.html"
+    success_url = "/patients"
+
+class UpdatePatientPrescriptionView(UpdateView):
+  model = Prescription
+  form_class = AddPatientPrescriptionForm
+  template_name = "patients/prescriptions/update.html"
+  success_url = '/patients'
+
   

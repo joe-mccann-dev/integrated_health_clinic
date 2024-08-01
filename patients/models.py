@@ -28,12 +28,12 @@ class Patient(models.Model):
   def get_absolute_url(self):
     return reverse("patients:detail", kwargs={"pk": self.pk})
 
-  def get_prescription_name(self):
+  def get_prescriptions(self):
     try:
-      script_name = Prescription.objects.get(patient = self).name
+      prescriptions = Prescription.objects.filter(patient = self)
     except Prescription.DoesNotExist:
-      script_name = "none"
-    return script_name
+      prescriptions = "none"
+    return prescriptions
   
   def get_prescription_instructions(self):
     try:
@@ -80,3 +80,5 @@ class Prescription(models.Model):
     self.clean()
     super().save(*args, **options)
 
+  def get_absolute_url(self):
+    return reverse("patients:detail", kwargs={"pk": self.patient.pk})
