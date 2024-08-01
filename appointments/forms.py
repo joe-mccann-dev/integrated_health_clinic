@@ -15,4 +15,5 @@ class AddAppointmentForm(ModelForm):
 class AddChartNoteForm(ModelForm):
     class Meta:
         model = ChartNote
-        fields = ['appointment', 'chart_note']
+        exclude = ['appointment']
+        

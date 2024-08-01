@@ -1,4 +1,5 @@
 from typing import Any
+from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -63,6 +64,17 @@ class AddChartNoteView(CreateView):
     model = ChartNote
     form_class = AddChartNoteForm
     template_name = "appointments/notes/add.html"
+
+    def get_initial(self):
+        initial = super().get_initial()
+        appointment_id = self.kwargs.get("appointment_id")
+        initial["appointment"] = get_object_or_404(Appointment, pk=appointment_id)
+        
+        return initial
+    
+    def form_valid(self, form):
+        form.instance.appointment = get_object_or_404(Appointment, pk=self.kwargs.get("appointment_id"))
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)

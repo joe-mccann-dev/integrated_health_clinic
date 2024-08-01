@@ -5,7 +5,7 @@
 
 {% block content %}
 <h2>Patient Charts</h2>
-<h3>Viewing chart notes for {{patient}}</h3>
+<h3>Viewing chart notes for <a href="{% url 'patients:detail' patient.id %}">{{patient}}</a></h3>
 <div>
   <ul>
     {% for note in chartnotes %}
