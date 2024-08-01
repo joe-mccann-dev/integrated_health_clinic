@@ -4,6 +4,7 @@
 
 {% block content %}
 <h2>{{practitioner}}</h2>
+<a href="{% url 'appointments:practitioner-appointments' practitioner.id %}">View upcoming appointments for this practitioner</a>
 <a href="{% url 'appointments:practitioner-chartnotes' practitioner.id %}">View appointment chart notes for this practitioner</a>
 <ul>
     <ul><li>

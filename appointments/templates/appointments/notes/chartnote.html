@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}Practitioner Charts{% endblock %}
+{% block title %}Appointment Chart Note{% endblock %}
 
 
 {% block content %}
-<h2>Practitioner Charts</h2>
 <h3>Appointment Note</h3>
 <h4>{{chartnote.appointment}}</h3>
 
@@ -12,5 +11,5 @@
   <p>{{chartnote.chart_note}}</p>
 </div>
 
-
+<a href="{% url 'patients:detail' chartnote.appointment.patient.id %}">Return to patient detail</a>
 {% endblock %}

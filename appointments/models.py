@@ -1,7 +1,7 @@
 from django.db import models
 from patients.models import Gender
 from django.core.exceptions import ValidationError
-from datetime import timedelta
+from datetime import timedelta, date
 
 class Practitioner(models.Model):
   TYPE_CHOICES = [
@@ -59,6 +59,9 @@ class Practitioner(models.Model):
   
   def current_appointments_by_date(self, appointment_date):
     return Appointment.objects.filter(practitioner=self, appointment_date=appointment_date)
+  
+  def upcoming_appointments(self):
+    return Appointment.objects.filter(practitioner=self, appointment_date__gte=date.today())
 
 class ChartNote(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)

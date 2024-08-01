@@ -3,11 +3,7 @@
 {% block title %}Appointment Details{% endblock %}
 
 {% block content %}
-<h2>Viewing Appoinment #{{appointment.id}}:</h2>
-<nav>
-    <a href="{% url 'appointments:update' appointment.id %}">Update Appointment</a>
-    <a href="{% url 'appointments:delete' appointment.id %}">Delete Appoinment</a>
-</nav>
+<h2>Appointment Details</h2>
 <ul>
     <li>Date: {{ appointment.appointment_date }} </li>
     <li>Time: {{ appointment.start_time}} -  {{ appointment.end_time}} </li>
@@ -22,4 +18,8 @@
        <a href="{% url 'appointments:appointment-chartnote' chartnote.id %}">Chart Note for {{appointment.patient.first_name}} {{appointment.patient.last_name}}</a>
     </li>
 </ul>
+<nav>
+    <a href="{% url 'appointments:update' appointment.id %}">Update Appointment</a>
+    <a href="{% url 'appointments:delete' appointment.id %}">Delete Appoinment</a>
+</nav>
 {% endblock %}

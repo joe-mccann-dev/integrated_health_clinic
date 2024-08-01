@@ -24,6 +24,11 @@ urlpatterns = [
         name="practitioner-detail",
     ),
     path(
+      "practitioners/<int:pk>/appointments",
+      views.PractitionerAppointmentsView.as_view(), 
+      name = "practitioner-appointments"
+    ),
+    path(
       "notes/practitioners/<int:pk>/",
       views.PractitionerChartsView.as_view(),
       name="practitioner-chartnotes",

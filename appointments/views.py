@@ -11,7 +11,19 @@ class IndexView(generic.ListView):
 
     def get_queryset(self):
         return Appointment.objects.order_by("appointment_date")
+    
+class PractitionerAppointmentsView(generic.DetailView):
+    model = Practitioner
+    template_name = "practitioners/appointments/index.html"
+    context_object_name = "practitioner"
 
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        practitioner = self.get_object()
+        appointments = practitioner.upcoming_appointments()
+        context["appointments"] = appointments
+
+        return context
 
 # secondary view on appointment click:
 class DetailView(generic.DetailView):

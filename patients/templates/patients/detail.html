@@ -3,11 +3,8 @@
 {% block title %}Patient Detail{% endblock %}
 
 {% block content %}
-<h2>Patient Information for {{patient}}:</h2>
-<nav>
-  <a href="{% url 'patients:update' patient.id %}">Update Patient Info</a>
-  <a href="{% url 'patients:delete' patient.id %}">Delete Patient</a>
-</nav>
+<h2>Patient Details</h2>
+<h3>{{patient}}</h3>
 <ul>
   <li>Name: {{ patient.first_name }} {{ patient.last_name }}</li>
   <li>Email: {{ patient.email }}</li>
@@ -26,4 +23,8 @@
     <a href="{% url 'patients:patient-chartnotes' patient.id %}">View chart notes for this patient</a>
   </li>
 </ul>
+<nav>
+  <a href="{% url 'patients:update' patient.id %}">Update Patient Info</a>
+  <a href="{% url 'patients:delete' patient.id %}">Delete Patient</a>
+</nav>
 {% endblock %}
