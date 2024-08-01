@@ -1,110 +1,120 @@
 - model: appointments.appointment
+  pk: 1
   fields:
     created_at: "2024-07-29T18:52:43.123456-04:00"
     updated_at: "2024-07-29T18:52:43.123456-04:00"
     practitioner: 5
     patient: 2
-    appointment_date: "2024-07-30"
-    day: 1
-    start_time_interval: 55
-    end_time_interval: 58
+    appointment_date: "2024-07-31"
+    day: 3
+    start_time_interval: 91
+    end_time_interval: 94
 
 - model: appointments.appointment
+  pk: 2
   fields:
     created_at: "2024-07-29T18:52:43.123457-04:00"
     updated_at: "2024-07-29T18:52:43.123457-04:00"
     practitioner: 2
     patient: 4
-    appointment_date: "2024-07-31"
-    day: 2
-    start_time_interval: 61
-    end_time_interval: 64
+    appointment_date: "2024-08-01"
+    day: 4
+    start_time_interval: 85
+    end_time_interval: 91
 
 - model: appointments.appointment
+  pk: 3
   fields:
     created_at: "2024-07-29T18:52:43.123458-04:00"
     updated_at: "2024-07-29T18:52:43.123458-04:00"
     practitioner: 1
     patient: 5
-    appointment_date: "2024-08-01"
-    day: 3
+    appointment_date: "2024-08-02"
+    day: 5
     start_time_interval: 61
     end_time_interval: 64
 
 - model: appointments.appointment
+  pk: 4
   fields:
     created_at: "2024-07-29T18:52:43.123459-04:00"
     updated_at: "2024-07-29T18:52:43.123459-04:00"
     practitioner: 7
     patient: 6
     appointment_date: "2024-08-02"
-    day: 4
+    day: 5
     start_time_interval: 73
     end_time_interval: 76
 
 - model: appointments.appointment
+  pk: 5
   fields:
     created_at: "2024-07-29T18:52:43.123460-04:00"
     updated_at: "2024-07-29T18:52:43.123460-04:00"
     practitioner: 3
     patient: 7
-    appointment_date: "2024-08-03"
+    appointment_date: "2024-08-02"
     day: 5
     start_time_interval: 79
     end_time_interval: 82
 
 - model: appointments.appointment
+  pk: 6
   fields:
     created_at: "2024-07-29T18:52:43.123461-04:00"
     updated_at: "2024-07-29T18:52:43.123461-04:00"
     practitioner: 1
     patient: 8
-    appointment_date: "2024-08-04"
-    day: 6
-    start_time_interval: 85
-    end_time_interval: 88
+    appointment_date: "2024-08-05"
+    day: 1
+    start_time_interval: 58
+    end_time_interval: 61
 
 - model: appointments.appointment
+  pk: 7
   fields:
     created_at: "2024-07-29T18:52:43.123462-04:00"
     updated_at: "2024-07-29T18:52:43.123462-04:00"
     practitioner: 2
     patient: 9
-    appointment_date: "2024-08-05"
-    day: 7
+    appointment_date: "2024-08-06"
+    day: 2
     start_time_interval: 91
     end_time_interval: 94
 
 
 - model: appointments.appointment
+  pk: 8
   fields:
     created_at: "2024-07-29T18:52:43.123463-04:00"
     updated_at: "2024-07-29T18:52:43.123463-04:00"
     practitioner: 3
     patient: 2
     appointment_date: "2024-08-02"
-    day: 1
+    day: 5
     start_time_interval: 97
     end_time_interval: 100
 
 - model: appointments.appointment
+  pk: 9
   fields:
     created_at: "2024-07-29T18:52:43.123464-04:00"
     updated_at: "2024-07-29T18:52:43.123464-04:00"
     practitioner: 5
     patient: 4
-    appointment_date: "2024-08-04"
-    day: 2
-    start_time_interval: 70
-    end_time_interval: 73
+    appointment_date: "2024-08-10"
+    day: 6
+    start_time_interval: 100
+    end_time_interval: 103
 
 - model: appointments.appointment
+  pk: 10
   fields:
     created_at: "2024-07-29T18:52:43.123465-04:00"
     updated_at: "2024-07-29T18:52:43.123465-04:00"
     practitioner: 4
     patient: 6
-    appointment_date: "2024-08-01"
-    day: 3
-    start_time_interval: 76
-    end_time_interval: 79 
+    appointment_date: "2024-08-03"
+    day: 6
+    start_time_interval: 46
+    end_time_interval: 49
