@@ -70,6 +70,14 @@ class ChartNote(models.Model):
   appointment = models.ForeignKey('appointments.Appointment', on_delete=models.RESTRICT)
   chart_note = models.TextField(default="")
 
+  def clean(self):
+    if len(self.chart_note) < 20:
+      raise ValidationError("Note needs to be at least 20 characters")
+
+  def save(self, *args, **options):
+    self.clean()
+    super().save(*args, **options)
+
 # represent availability blocks with starting interval id
 # and ending interval id
 # Ex: 11:00 -> 11:10
@@ -125,7 +133,7 @@ class Appointment(models.Model):
     try:
       chart_note = ChartNote.objects.get(appointment = self)
     except:
-      chart_note = ChartNote(appointment=self)
+      chart_note = ""
     return chart_note
 
   def start_time(self):

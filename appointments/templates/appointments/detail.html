@@ -13,7 +13,7 @@
         </a>
     </li>
     <li>Practitioner: <a href="{% url 'appointments:practitioner-detail' appointment.practitioner.id  %}">{{ appointment.practitioner }}</a></li>
-    {% if chartnote.id %}
+    {% if chartnote != "" %}
     <li>
         Appointment Chart Notes:
         <a href="{% url 'appointments:appointment-chartnote' chartnote.id %}">
