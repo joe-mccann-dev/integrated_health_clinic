@@ -117,3 +117,13 @@ li:hover {
   border-radius: 12px;
   background-color: var(--slate-200);
 }
+
+.appt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.patient-name {
+  font-weight: 700;
+}
