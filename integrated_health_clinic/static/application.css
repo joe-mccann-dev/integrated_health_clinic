@@ -4,6 +4,7 @@
   --slate-100: #f1f5f9;
   --slate-200: #e2e8f0;
   --slate-500: #64748b;
+  --slate-600: #475569;
   --slate-800: #1e293b;
   --indigo-500: #6366f1;
 }
@@ -33,10 +34,16 @@ body {
   gap: 12px;
 }
 
+h1, h2, h3, h4 {
+  color: var(--slate-600);
+  font-weight: 300;
+}
+
 nav {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  font-weight: 700;
 }
 
 form p {
