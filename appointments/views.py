@@ -1,10 +1,8 @@
 from typing import Any
-from django import forms
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from .models import Appointment, Availability, TimeTable, Practitioner
+from .models import Appointment, Availability, ChartNote, Practitioner
 from appointments.forms import AddAppointmentForm
-from datetime import date
 
 # initial view on load:
 class IndexView(generic.ListView):
@@ -24,6 +22,8 @@ class DetailView(generic.DetailView):
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
         appointment = self.get_object()
+        # retrieves chart note from individual appointment
+        context["chartnote"] = ChartNote.objects.get(appointment = appointment)
         return context
 
 
@@ -83,4 +83,30 @@ class PractitionerDetailView(generic.DetailView):
         practitioner = self.get_object()
         context["gender_display"] = practitioner.get_gender_display()
         context["days_available"] = practitioner.get_available_day_names()
+        return context
+    
+class PractitionerChartsView(generic.DetailView):
+    model = Practitioner
+    template_name = "practitioners/notes/chartnotes.html"
+    context_object_name = "chartnotes"
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        practitioner = self.get_object()
+        appointments = Appointment.objects.filter(practitioner=self.get_object())
+        context["appointments"] = appointments
+        context["notes"] = ChartNote.objects.filter(appointment__in=appointments)
+        context["practitioner"] = practitioner
+        return context
+    
+class AppointmentChartView(generic.DetailView):
+    model = ChartNote
+    template_name = "appointments/notes/chartnote.html"
+    context_object_name = "chartnote"
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        chart_note = self.get_object()
+        context["chartnote"] = chart_note
+
         return context

@@ -9,7 +9,7 @@ Practitioner Index
 {% for pract in practitioners %}
 <a href="{% url 'appointments:practitioner-detail' pract.id %}">
         <ul>
-            <li>{{pract.full_name}} - {{pract.practitioner_type}}</li>
+            <li>{{pract}}</li>
         </ul>
     </a>
   {% endfor %}

@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Patient Charts{% endblock %}
+
+
+{% block content %}
+<h2>Patient Charts</h2>
+<h3>Viewing chart notes for {{patient}}</h3>
+<div>
+  <ul>
+    {% for note in chartnotes %}
+      <li>
+        <p>
+          <a href="{% url 'appointments:detail' note.appointment.practitioner.id %}">
+            {{note.appointment.practitioner}} on {{note.appointment.appointment_date}}
+          </a></p>
+        <div class="chart-note">
+          <p>{{note.chart_note}}</p>
+        </div>
+      </li>
+    {% endfor%}
+    </ul>
+
+</div>
+
+
+{% endblock %}

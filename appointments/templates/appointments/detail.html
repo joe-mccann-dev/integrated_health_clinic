@@ -11,7 +11,15 @@
 <ul>
     <li>Date: {{ appointment.appointment_date }} </li>
     <li>Time: {{ appointment.start_time}} -  {{ appointment.end_time}} </li>
-    <li>Patient: {{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</li>
-    <li>Practitioner: {{ appointment.practitioner }}</li>
+    <li> Patient: 
+        <a href="{% url 'patients:detail' appointment.patient.id %}">
+           {{ appointment.patient.first_name }} {{ appointment.patient.last_name }}
+        </a>
+    </li>
+    <li>Practitioner: <a href="{% url 'appointments:practitioner-detail' appointment.practitioner.id  %}">{{ appointment.practitioner }}</a></li>
+    <li>
+        Appointment Chart Notes:
+       <a href="{% url 'appointments:appointment-chartnote' chartnote.id %}">Chart Note for {{appointment.patient.first_name}} {{appointment.patient.last_name}}</a>
+    </li>
 </ul>
 {% endblock %}

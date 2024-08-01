@@ -109,8 +109,6 @@ class Availability(models.Model):
     super().save(*args, **options)
     
 class Appointment(models.Model):
-  # TODO: Filter appointments by availability
-  # TODO: Update availability after an appointment is made
   created_at = models.DateTimeField(auto_now_add=True)
   updated_at = models.DateTimeField(auto_now=True)
   practitioner = models.ForeignKey('appointments.Practitioner', on_delete=models.CASCADE)
@@ -127,6 +125,12 @@ class Appointment(models.Model):
   def end_time(self):
     table_entry = TimeTable.objects.get(time_interval_id = self.end_time_interval)
     return table_entry.time_value.strftime("%H:%M")
+  
+  def __str__(self):
+    return f"""
+      {self.patient} |
+      {self.appointment_date} |
+      {self.start_time()} - {self.end_time()}"""
   
   def clean(self):
     # dateime.weekday() counts Monday as 0, in this app it equals 1

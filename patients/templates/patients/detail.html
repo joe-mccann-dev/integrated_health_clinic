@@ -3,7 +3,7 @@
 {% block title %}Patient Detail{% endblock %}
 
 {% block content %}
-<h2>Viewing Patient with ID {{patient.id}}:</h2>
+<h2>Patient Information for {{patient}}:</h2>
 <nav>
   <a href="{% url 'patients:update' patient.id %}">Update Patient Info</a>
   <a href="{% url 'patients:delete' patient.id %}">Delete Patient</a>
@@ -14,8 +14,16 @@
   <li>Date of Birth: {{ patient.dob }} </li>
   <li>Address: {{patient.address}}</li>
   <li>Gender: {{gender_display}}</li>
-  <li>Primary Practitioner: {{patient.primary_practitioner}}</li>
+  <li>Primary Practitioner: 
+    <a href="{% url 'appointments:practitioner-detail' patient.primary_practitioner.id %}">
+      {{patient.primary_practitioner}}
+    </a>
+    
+  </li>
   <li>Prescription: {{script_name}}</li>
   <li>Prescription Instructions: {{ instructions }}</li>
+  <li>
+    <a href="{% url 'patients:patient-chartnotes' patient.id %}">View chart notes for this patient</a>
+  </li>
 </ul>
 {% endblock %}

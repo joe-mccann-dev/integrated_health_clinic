@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Practitioner Charts{% endblock %}
+
+
+{% block content %}
+<h2>Practitioner Charts</h2>
+<h3>{{practitioner}}</h3>
+<h4>Completed Charts</h4>
+<div>
+  <ul>
+    {% for note in notes %}
+      <li>
+        <p>
+          <a href="{% url 'appointments:detail' note.appointment.practitioner.id %}">
+            {{note.appointment.patient}} on {{note.appointment.appointment_date}}
+          </a></p>
+        <div class="chart-note">
+          <p>{{note.chart_note}}</p>
+        </div>
+      </li>
+    {% endfor%}
+    </ul>
+
+</div>
+
+
+{% endblock %}
