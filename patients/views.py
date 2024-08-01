@@ -1,5 +1,5 @@
 from appointments.models import Appointment, ChartNote
-from .models import Patient
+from patients.models import InsuranceInfo, Patient
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from patients.forms import AddPatientForm
@@ -22,6 +22,9 @@ class DetailView(generic.DetailView):
     context["gender_display"] = patient.get_gender_display()
     context["script_name"] = Patient.get_prescription_name(patient)
     context["instructions"] = Patient.get_prescription_instructions(patient)
+    context["insurance_provider"] = patient.get_insurance_provider()
+    context["insurance_member_id"] = patient.get_insurance_member_id()
+
     return context
   
 class PatientChartsView(generic.DetailView):

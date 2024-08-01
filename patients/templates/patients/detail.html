@@ -15,8 +15,8 @@
     <a href="{% url 'appointments:practitioner-detail' patient.primary_practitioner.id %}">
       {{patient.primary_practitioner}}
     </a>
-    
-  </li>
+  <li>Insurance Provider: {{insurance_provider}}</li>
+  <li>Insurance Member ID: {{insurance_member_id}}</li>
   <li>Prescription: {{script_name}}</li>
   <li>Prescription Instructions: {{ instructions }}</li>
   <li>

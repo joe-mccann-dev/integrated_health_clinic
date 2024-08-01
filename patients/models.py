@@ -32,15 +32,29 @@ class Patient(models.Model):
     try:
       script_name = Prescription.objects.get(patient = self).name
     except Prescription.DoesNotExist:
-      script_name = "n/a"
+      script_name = "none"
     return script_name
   
   def get_prescription_instructions(self):
     try:
       instructions = Prescription.objects.get(patient = self).instructions
     except Prescription.DoesNotExist:
-      instructions = ""
+      instructions = "none"
     return instructions
+  
+  def get_insurance_provider(self):
+    try:
+      provider = InsuranceInfo.objects.get(patient=self).provider
+    except:
+      provider = "none"
+    return provider
+  
+  def get_insurance_member_id(self):
+    try:
+      member_id = InsuranceInfo.objects.get(patient=self).member_id
+    except:
+      member_id = "none"
+    return member_id
 
 class InsuranceInfo(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)
@@ -48,6 +62,7 @@ class InsuranceInfo(models.Model):
   patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
   provider = models.CharField(max_length=50)
   member_id = models.CharField(max_length=50)
+
 
 class Prescription(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)
