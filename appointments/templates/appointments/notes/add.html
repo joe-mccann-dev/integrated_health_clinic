@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Create a Chart Note{% endblock %}
+
+{% block content %}
+<h2>Create a Chart Note</h2>
+
+<div>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+  <input type="submit" value="Save Chart Note">
+</div>
+
+{% endblock %} 

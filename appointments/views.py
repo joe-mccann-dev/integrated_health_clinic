@@ -1,8 +1,9 @@
 from typing import Any
+from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from .models import Appointment, Availability, ChartNote, Practitioner
-from appointments.forms import AddAppointmentForm
+from appointments.forms import AddAppointmentForm, AddChartNoteForm
 
 # initial view on load:
 class IndexView(generic.ListView):
@@ -57,6 +58,19 @@ class AddAppointmentView(CreateView):
                 practitioner_availabilities[practitioner] = avail_times_by_day
         context["availabilities"] = practitioner_availabilities
         return context
+    
+class AddChartNoteView(CreateView):
+    model = ChartNote
+    form_class = AddChartNoteForm
+    template_name = "appointments/notes/add.html"
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+
+        return context
+    
+    def get_success_url(self):
+        return reverse_lazy('add-chartnote', kwargs={'pk': self.object.pk})
 
 
 # view for updating appointment

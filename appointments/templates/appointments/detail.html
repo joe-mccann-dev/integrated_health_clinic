@@ -18,10 +18,10 @@
         Appointment Chart Notes:
         <a href="{% url 'appointments:appointment-chartnote' chartnote.id %}">
             Chart Note for {{appointment.patient.first_name}} {{appointment.patient.last_name}}
-        </a>
-    
+        </a>    
     </li>
-        
+    {% else %}
+    <a href="{% url 'appointments:add-chartnote' appointment.id %}">Create a chart note for {{appointment.patient}}</a>        
     {% endif %}
 </ul>
 <nav>

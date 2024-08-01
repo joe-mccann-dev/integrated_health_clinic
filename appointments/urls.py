@@ -37,5 +37,10 @@ urlpatterns = [
       "notes/<int:pk>",
       views.AppointmentChartView.as_view(),
       name="appointment-chartnote",
+    ),
+    path(
+      "notes/<int:pk>/add",
+      views.AddChartNoteView.as_view(),
+      name="add-chartnote"
     )
 ]

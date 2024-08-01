@@ -1,11 +1,8 @@
 from django.forms import ModelForm, widgets
-from .models import Appointment
+from .models import Appointment, ChartNote
 
 
 class AddAppointmentForm(ModelForm):
-    # def __init__(self, *args, **kwargs):
-    #     super(AddAppointmentForm, self).__init__(*args, **kwargs)
-    #     self.fields['day'].required = False
     class Meta:
         model = Appointment
         widgets = {"appointment_date": widgets.DateInput(attrs={"type": "date"})}
@@ -14,3 +11,8 @@ class AddAppointmentForm(ModelForm):
             "start_time_interval": "Start time",
             "end_time_interval": "End time"
         }
+
+class AddChartNoteForm(ModelForm):
+    class Meta:
+        model = ChartNote
+        exclude = ['appointment']
