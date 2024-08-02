@@ -111,10 +111,10 @@ class Appointment(models.Model):
         for appt in prac_appts_on_desired_appt_date:
             start_interval = appt.start_time_interval
             end_interval = appt.end_time_interval
-        if self.start_time_interval in range(start_interval, end_interval + 1):
-            raise ValidationError(f"Desired appointment starts during another appointment. {practitioner} already has an appointment from {appt.start_time()} to {appt.end_time()}")
-        if self.end_time_interval in range(start_interval, end_interval + 1):
-            raise ValidationError(f"Desired appointment runs into another appointment. {practitioner} has an appointment from {appt.start_time()} to {appt.end_time()}")
+            if self.start_time_interval in range(start_interval, end_interval + 1):
+                raise ValidationError(f"Desired appointment starts during another appointment. {practitioner} already has an appointment from {appt.start_time()} to {appt.end_time()}")
+            if self.end_time_interval in range(start_interval, end_interval + 1):
+                raise ValidationError(f"Desired appointment runs into another appointment. {practitioner} has an appointment from {appt.start_time()} to {appt.end_time()}")
     
     def save(self, *args, **options):
         self.clean()

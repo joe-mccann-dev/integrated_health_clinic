@@ -5,72 +5,72 @@
 {% block content %}
 <h2>Patient Details</h2>
 <h3>{{patient}}</h4>
-<div>
-  <a href="{% url 'patients:update' patient.id %}">Update</a>
-  <a href="{% url 'patients:delete' patient.id %}">Delete</a>
-</div>
-
-<h4>Demographic Info</h4>
-<ul>
-  <li>Name: <span class="attribute">{{ patient.first_name }} {{ patient.last_name }}</span></li>
-  <li>Email: <span class="attribute">{{ patient.email }}</span></li>
-  <li>Date of Birth: <span class="attribute">{{ patient.dob }}</span> </li>
-  <li>Address: <span class="attribute">{{patient.address}}</span></li>
-  <li>Gender: <span class="attribute">{{gender_display}}</span></li>
-  <li>Primary Practitioner: 
-    <a href="{% url 'appointments:practitioner-detail' patient.primary_practitioner.id %}">
-      {{patient.primary_practitioner}}
-    </a>
-  </li>
-  <br>
-  <h4>Insurance</h4>
-  {% if insurance.id %}
-    <li>Insurance Provider: <span class="attribute">{{insurance.provider}}</span></li>
-    <li>Insurance Member ID: <span class="attribute">{{insurance.member_id}}</span></li>
     <div>
-      <a href="{% url 'patients:update-insurance' patient.id insurance.id %}">Update</a>
+        <a href="{% url 'patients:update' patient.id %}">Update</a>
+        <a href="{% url 'patients:delete' patient.id %}">Delete</a>
     </div>
-  {% else %}
-  <div>
-    <a href="{% url 'patients:add-insurance' patient.id %}">Add Insurance Information</a>
-  </div>
-  {% endif %}
-  <br>
-  <h4>Prescriptions</h4>
-  <ul>
-    <li>
-      <a href="{% url 'patients:add-prescription' patient.id %}">Add a prescription</a>
-    </li>
-    <ol>
-    {% for script in prescriptions %}
-        <li>
-          <ul>
-            <li>
-              Prescription: <span class="attribute">{{script.name}}</span>
-            </li>
-            <li>
-              Prescriber: <span class="attribute">{{script.prescriber}}</span>
-            </li>
-            <li>
-              Instructions: <span class="attribute">{{script.instructions}}</span> 
-            </li>
-            <li>
-              <nav>
-                <a href="{% url 'patients:update-prescription' patient.id script.id %}">Update</a>
-                <a href="{% url 'patients:delete-prescription' patient.id script.id %}">Delete</a>
-              </nav>
-            </li>
-          </ul>
+
+    <h4>Demographic Info</h4>
+    <ul>
+        <li>Name: <span class="attribute">{{ patient.first_name }} {{ patient.last_name }}</span></li>
+        <li>Email: <span class="attribute">{{ patient.email }}</span></li>
+        <li>Date of Birth: <span class="attribute">{{ patient.dob }}</span> </li>
+        <li>Address: <span class="attribute">{{patient.address}}</span></li>
+        <li>Gender: <span class="attribute">{{gender_display}}</span></li>
+        <li>Primary Practitioner:
+            <a href="{% url 'practitioners:detail' patient.primary_practitioner.id %}">
+                {{patient.primary_practitioner}}
+            </a>
         </li>
-    {% endfor %}
-    </ol>
-  </ul>
-  <br>
-  <h4>Charts</h4>
-  <ul>
-    <li>
-      <a href="{% url 'patients:patient-chartnotes' patient.id %}">View chart notes for this patient</a>
-    </li>
-  </ul>
-</ul>
-{% endblock %}
+        <br>
+        <h4>Insurance</h4>
+        {% if insurance.id %}
+        <li>Insurance Provider: <span class="attribute">{{insurance.provider}}</span></li>
+        <li>Insurance Member ID: <span class="attribute">{{insurance.member_id}}</span></li>
+        <div>
+            <a href="{% url 'patients:update-insurance' patient.id insurance.id %}">Update</a>
+        </div>
+        {% else %}
+        <div>
+            <a href="{% url 'patients:add-insurance' patient.id %}">Add Insurance Information</a>
+        </div>
+        {% endif %}
+        <br>
+        <h4>Prescriptions</h4>
+        <ul>
+            <li>
+                <a href="{% url 'patients:add-prescription' patient.id %}">Add a prescription</a>
+            </li>
+            <ol>
+                {% for script in prescriptions %}
+                <li>
+                    <ul>
+                        <li>
+                            Prescription: <span class="attribute">{{script.name}}</span>
+                        </li>
+                        <li>
+                            Prescriber: <span class="attribute">{{script.prescriber}}</span>
+                        </li>
+                        <li>
+                            Instructions: <span class="attribute">{{script.instructions}}</span>
+                        </li>
+                        <li>
+                            <nav>
+                                <a href="{% url 'patients:update-prescription' patient.id script.id %}">Update</a>
+                                <a href="{% url 'patients:delete-prescription' patient.id script.id %}">Delete</a>
+                            </nav>
+                        </li>
+                    </ul>
+                </li>
+                {% endfor %}
+            </ol>
+        </ul>
+        <br>
+        <h4>Charts</h4>
+        <ul>
+            <li>
+                <a href="{% url 'patients:patient-chartnotes' patient.id %}">View chart notes for this patient</a>
+            </li>
+        </ul>
+    </ul>
+    {% endblock %}

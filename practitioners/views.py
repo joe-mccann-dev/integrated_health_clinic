@@ -28,7 +28,7 @@ class PractitionerDetailView(generic.DetailView):
 # View utilizes query method to filter appointments by practitioner
 class PractitionerAppointmentsView(generic.DetailView):
     model = apps.get_model('practitioners', 'Practitioner')
-    template_name = "practitioners/appointments/index.html"
+    template_name = "appointments/index.html"
     context_object_name = "practitioner"
 
     def get_context_data(self, **kwargs: Any):
@@ -42,7 +42,7 @@ class PractitionerAppointmentsView(generic.DetailView):
 # view all of a practitioner's completed chart notes
 class PractitionerChartsView(generic.DetailView):
     model = apps.get_model('practitioners', 'Practitioner')
-    template_name = "practitioners/notes/chartnotes.html"
+    template_name = "chartnotes/chartnotes.html"
     context_object_name = "chartnotes"
 
     def get_context_data(self, **kwargs: Any):

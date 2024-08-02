@@ -6,22 +6,23 @@
 <h2>Appointment Details</h2>
 <ul>
     <li>Date: <span class="attribute">{{ appointment.appointment_date }}</span> </li>
-    <li>Time: <span class="attribute">{{ appointment.start_time}} -  {{ appointment.end_time}}</span> </li>
-    <li> Patient: 
+    <li>Time: <span class="attribute">{{ appointment.start_time}} - {{ appointment.end_time}}</span> </li>
+    <li> Patient:
         <a href="{% url 'patients:detail' appointment.patient.id %}">
-           {{ appointment.patient }}
+            {{ appointment.patient }}
         </a>
     </li>
-    <li>Practitioner: <a href="{% url 'appointments:practitioner-detail' appointment.practitioner.id  %}">{{ appointment.practitioner }}</a></li>
+    <li>Practitioner: <a href="{% url 'practitioners:detail' appointment.practitioner.id  %}">
+            {{appointment.practitioner }}</a></li>
     {% if chartnote != "" %}
     <li>
         Appointment Chart Notes:
         <a href="{% url 'appointments:appointment-chartnote' chartnote.id %}">
             Chart Note for {{appointment.patient.first_name}} {{appointment.patient.last_name}}
-        </a>    
+        </a>
     </li>
     {% else %}
-    <a href="{% url 'appointments:add-chartnote' appointment.id %}">Create a chart note for {{appointment.patient}}</a>        
+    <a href="{% url 'appointments:add-chartnote' appointment.id %}">Create a chart note for {{appointment.patient}}</a>
     {% endif %}
 </ul>
 <div>
