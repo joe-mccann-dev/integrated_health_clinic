@@ -1,7 +1,8 @@
 from django.contrib import admin
+from .models import ChartNote, TimeTable, Day, Availability, Appointment
+from django.apps import apps
 
-from .models import Practitioner, ChartNote, TimeTable, Day, Availability, Appointment
-
+Practitioner = apps.get_model('practitioners', 'Practitioner')
 admin.site.register(Practitioner)
 admin.site.register(ChartNote)
 admin.site.register(TimeTable)

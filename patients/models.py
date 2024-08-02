@@ -20,7 +20,7 @@ class Patient(models.Model):
   address = models.CharField(max_length=200)
   gender = models.SmallIntegerField(choices=Gender.choices)
   # set primary practitioner to null if practitioner's id is removed from clinic database
-  primary_practitioner = models.ForeignKey('appointments.Practitioner', on_delete=models.SET_NULL, null=True)
+  primary_practitioner = models.ForeignKey('practitioners.Practitioner', on_delete=models.SET_NULL, null=True)
 
   def full_name(self):
     return self.first_name + ' ' +self.last_name
@@ -60,7 +60,7 @@ class Prescription(models.Model):
   name = models.CharField(max_length=100)
   instructions = models.CharField(max_length=200)
   patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-  prescriber = models.ForeignKey('appointments.Practitioner', on_delete=models.SET_NULL, null=True)
+  prescriber = models.ForeignKey('practitioners.Practitioner', on_delete=models.SET_NULL, null=True)
 
   def clean(self):
     if not self.prescriber.is_prescriber:

@@ -1,9 +1,9 @@
 from django.db import models
 from patients.models import Gender
-from appointments.models import Appointment, TimeTable, Day, TIME_CHOICES
-from datetime import date
+from appointments.time_choices import TIME_CHOICES
 from django.core.exceptions import ValidationError
-
+from django.apps import apps
+from datetime import date
 
 class Practitioner(models.Model):
     TYPE_CHOICES = [
@@ -49,6 +49,7 @@ class Practitioner(models.Model):
         return ', '.join(str(day) for day in days)
   
     def get_available_times_by_day(self):
+        TimeTable = apps.get_model('appointments', 'TimeTable')
         availabilities = self.get_availablities()
         days_dict = {}
         for availability in availabilities:
@@ -58,18 +59,20 @@ class Practitioner(models.Model):
                 days_dict[availability.day] = (start.strftime('%H:%M'), end.strftime('%H:%M'))
     
         return days_dict
-  
+    
     def current_appointments_by_date(self, appointment_date):
+        Appointment = apps.get_model('appointments', 'Appointment')
         return Appointment.objects.filter(practitioner=self, appointment_date=appointment_date)
   
     def upcoming_appointments(self):
+        Appointment = apps.get_model('appointments', 'Appointment')
         return Appointment.objects.filter(practitioner=self, appointment_date__gte=date.today())
     
 class Availability(models.Model):
     # remove availability entries associated with a removed practitioner
     practitioner = models.ForeignKey('practitioners.Practitioner', on_delete=models.CASCADE)
     # if day deleted, remove all availability entries for that day
-    day = models.ForeignKey(Day, on_delete=models.CASCADE)
+    day = models.ForeignKey('appointments.Day', on_delete=models.CASCADE)
     start_time_interval = models.SmallIntegerField(choices=TIME_CHOICES)
     end_time_interval = models.SmallIntegerField(choices=TIME_CHOICES)
 

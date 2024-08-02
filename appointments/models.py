@@ -1,18 +1,10 @@
 from django.db import models
 from django.urls import reverse
-from patients.models import Gender
-from practitioners.models import Practitioner, Availability
+from practitioners.models import Availability
 from django.core.exceptions import ValidationError
-from datetime import timedelta
+from appointments.time_choices import TIME_CHOICES
+from practitioners.utils import get_available_day_objects, get_available_day_names
 
-# represent availability blocks with starting interval id
-# and ending interval id
-# TIME_CHOICES = [
-#   (1, '00:00:00'),
-#   (2, '00:00:10'),
-#   etc...
-# ]
-TIME_CHOICES = [(i + 1, str(timedelta(minutes=i * 10))) for i in range(144)]
 class TimeTable(models.Model):
     def __str__(self):
         return f"{self.time_value}"
@@ -79,11 +71,11 @@ class Appointment(models.Model):
     def clean(self):
         # dateime.weekday() counts Monday as 0, in this app it equals 1
         day_id = self.appointment_date.weekday() + 1
-        available_day_objects = Practitioner.get_available_day_objects(self.practitioner)
+        available_day_objects = get_available_day_objects(self.practitioner)
         day = Day.objects.get(day_id=day_id)
 
-        if day not in Practitioner.get_available_day_objects(self.practitioner):
-            raise ValidationError("Practitioner is available on " + Practitioner.get_available_day_names(self.practitioner))
+        if day not in get_available_day_objects(self.practitioner):
+            raise ValidationError("Practitioner is available on " + get_available_day_names(self.practitioner))
     
         self.validate_appointment_available()
         self.validate_appointment_intervals()
