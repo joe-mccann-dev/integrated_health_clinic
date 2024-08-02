@@ -1,5 +1,5 @@
 from django.forms import ModelForm, widgets
-from .models import Patient, Prescription
+from .models import InsuranceInfo, Patient, Prescription
 
 class AddPatientForm(ModelForm):
   class Meta:
@@ -12,4 +12,9 @@ class AddPatientForm(ModelForm):
 class AddPatientPrescriptionForm(ModelForm):
   class Meta:
     model = Prescription
+    exclude = ['patient']
+
+class AddPatientInsuranceInfoForm(ModelForm):
+  class Meta:
+    model = InsuranceInfo
     exclude = ['patient']

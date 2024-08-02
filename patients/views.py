@@ -4,7 +4,9 @@ from appointments.models import Appointment, ChartNote
 from patients.models import InsuranceInfo, Patient, Prescription
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from patients.forms import AddPatientForm, AddPatientPrescriptionForm
+from patients.forms import AddPatientForm, AddPatientInsuranceInfoForm, AddPatientPrescriptionForm
+
+# --- STANDARD PATIENT VIEWS ---
 
 class IndexView(generic.ListView):
   template_name = "patients/index.html"
@@ -23,24 +25,7 @@ class DetailView(generic.DetailView):
     patient = self.get_object()
     context["gender_display"] = patient.get_gender_display()
     context["prescriptions"] = Patient.get_prescriptions(patient)
-    context["insurance_provider"] = patient.get_insurance_provider()
-    context["insurance_member_id"] = patient.get_insurance_member_id()
-
-    return context
-  
-class PatientChartsView(generic.DetailView):
-  model = Patient
-  template_name = "patients/notes/chartnotes.html"
-  context_object_name = "chartnotes"
-
-  def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    patient = self.get_object()
-    appointments = Appointment.objects.filter(patient = patient)
-    chart_notes = ChartNote.objects.filter(appointment__in=appointments)
-    context["chartnotes"] = chart_notes
-    context["appointments"] = appointments
-    context["patient"] = patient
+    context["insurance"] = Patient.get_insurance_info(patient)
 
     return context
   
@@ -60,6 +45,27 @@ class DeletePatientView(DeleteView):
   model = Patient
   success_url = '/patients'
   template_name = "patients/modify/delete.html"
+
+
+# --- CHARTS VIEW ---
+  
+class PatientChartsView(generic.DetailView):
+  model = Patient
+  template_name = "patients/notes/chartnotes.html"
+  context_object_name = "chartnotes"
+
+  def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    patient = self.get_object()
+    appointments = Appointment.objects.filter(patient = patient)
+    chart_notes = ChartNote.objects.filter(appointment__in=appointments)
+    context["chartnotes"] = chart_notes
+    context["appointments"] = appointments
+    context["patient"] = patient
+
+    return context
+  
+# --- PRESCRIPTION VIEWS ---
 
 class AddPatientPrescriptionView(CreateView):
   model = Prescription
@@ -95,4 +101,34 @@ class UpdatePatientPrescriptionView(UpdateView):
   template_name = "patients/prescriptions/update.html"
   success_url = '/patients'
 
+
+# --- INSURANCE VIEWS ---
+
+class AddPatientInsuranceView(CreateView):
+  model = InsuranceInfo
+  form_class = AddPatientInsuranceInfoForm
+  template_name = "patients/insurance/update.html"
+  success_url = "/patients"
+
+  def get_context_data(self, **kwargs : Any):
+    context = super().get_context_data(**kwargs)
+    patient_id = self.kwargs.get("patient_id")
+    context["patient"] = get_object_or_404(Patient, pk=patient_id)
+
+    return context;
+
+
+class UpdatePatientInsuranceView(UpdateView):
+  model = InsuranceInfo
+  form_class = AddPatientInsuranceInfoForm
+  template_name = "patients/insurance/update.html"
+  success_url = "/patients"
+
+  def get_context_data(self, **kwargs : Any):
+    context = super().get_context_data(**kwargs)
+    patient_id = self.kwargs.get("patient_id")
+    context["patient"] = get_object_or_404(Patient, pk=patient_id)
+
+    return context;
+    
   

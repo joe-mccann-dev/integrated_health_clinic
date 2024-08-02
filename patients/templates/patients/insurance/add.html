@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Enter Insurance Information{% endblock %}
+
+{% block content %}
+<h2>Enter Insurance Info for <a href="{% url 'patients:detail' patient.id %}">{{patient}}</a></h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="Update Insurance">
+{% endblock %}

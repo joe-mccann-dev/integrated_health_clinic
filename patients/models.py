@@ -35,19 +35,13 @@ class Patient(models.Model):
       prescriptions = "none"
     return prescriptions
   
-  def get_insurance_provider(self):
+  def get_insurance_info(self):
     try:
-      provider = InsuranceInfo.objects.get(patient=self).provider
+      insurance_info = InsuranceInfo.objects.get(patient=self)
     except:
-      provider = "none"
-    return provider
+      insurance_info = InsuranceInfo(patient=self, provider="n/a", member_id="n/a").save()
+    return insurance_info
   
-  def get_insurance_member_id(self):
-    try:
-      member_id = InsuranceInfo.objects.get(patient=self).member_id
-    except:
-      member_id = "none"
-    return member_id
 
 class InsuranceInfo(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)
@@ -55,6 +49,9 @@ class InsuranceInfo(models.Model):
   patient = models.OneToOneField(Patient, on_delete=models.CASCADE)
   provider = models.CharField(max_length=50)
   member_id = models.CharField(max_length=50)
+
+  def save(self, *args, **options):
+    super().save(*args, **options)
 
 
 class Prescription(models.Model):

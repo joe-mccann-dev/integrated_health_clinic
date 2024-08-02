@@ -24,8 +24,17 @@
   </li>
   <br>
   <h4>Insurance</h4>
-  <li>Insurance Provider: <span class="attribute">{{insurance_provider}}</span></li>
-  <li>Insurance Member ID: <span class="attribute">{{insurance_member_id}}</span></li>
+  {% if insurance.id %}
+    <li>Insurance Provider: <span class="attribute">{{insurance.provider}}</span></li>
+    <li>Insurance Member ID: <span class="attribute">{{insurance.member_id}}</span></li>
+    <div>
+      <a href="{% url 'patients:update-insurance' patient.id insurance.id %}">Update</a>
+    </div>
+  {% else %}
+  <div>
+    <a href="{% url 'patients:add-insurance' patient.id insurance.id %}">Add Insurance Information</a>
+  </div>
+  {% endif %}
   <br>
   <h4>Prescriptions</h4>
   <ul>
