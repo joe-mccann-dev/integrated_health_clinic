@@ -5,53 +5,6 @@ from practitioners.models import Practitioner, Availability
 from django.core.exceptions import ValidationError
 from datetime import timedelta, date
 
-
-class ChartNote(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    # prevent removal of important medical history
-    # appointment = models.ForeignKey('appointments.Appointment', on_delete=models.RESTRICT)
-    # chart_note = models.TextField(default="")
-
-    def clean(self):
-        if len(self.chart_note) < 20:
-            raise ValidationError("Note needs to be at least 20 characters")
-
-    def save(self, *args, **options):
-        self.clean()
-        super().save(*args, **options)
-
-    def get_absolute_url(self):
-        return reverse("appointments:detail", kwargs={"pk": self.appointment.pk})
-
-# represent availability blocks with starting interval id
-# and ending interval id
-# Ex: 11:00 -> 11:10
-# idea obtained from https://stackoverflow.com/questions/62232148/database-table-design-for-availability-within-time-ranges-per-day
-
-TIME_CHOICES = [(i + 1, str(timedelta(minutes=i * 10))) for i in range(144)]
-# TIME_CHOICES = [
-#   (1, '00:00:00'),
-#   (2, '00:00:10'),
-#   etc...
-# ]
-    
-class TimeTable(models.Model):
-    def __str__(self):
-        return f"{self.time_value}"
-  
-    time_interval_id = models.SmallIntegerField(primary_key=True, choices=TIME_CHOICES)
-    time_value = models.TimeField(default='00:00:00')
-
-class Day(models.Model):
-    def __str__(self): 
-        return self.name
-  
-    day_id = models.SmallIntegerField(primary_key=True)
-    name = models.CharField(max_length=10)
-
-
-    
 class Appointment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -134,3 +87,43 @@ class Appointment(models.Model):
     def save(self, *args, **options):
         self.clean()
         super().save(*args, **options)
+
+class Day(models.Model):
+    def __str__(self): 
+        return self.name
+  
+    day_id = models.SmallIntegerField(primary_key=True)
+    name = models.CharField(max_length=10)
+    
+# represent availability blocks with starting interval id
+# and ending interval id
+# TIME_CHOICES = [
+#   (1, '00:00:00'),
+#   (2, '00:00:10'),
+#   etc...
+# ]
+TIME_CHOICES = [(i + 1, str(timedelta(minutes=i * 10))) for i in range(144)]
+class TimeTable(models.Model):
+    def __str__(self):
+        return f"{self.time_value}"
+  
+    time_interval_id = models.SmallIntegerField(primary_key=True, choices=TIME_CHOICES)
+    time_value = models.TimeField(default='00:00:00')
+
+class ChartNote(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    # prevent removal of important medical history
+    # appointment = models.ForeignKey('appointments.Appointment', on_delete=models.RESTRICT)
+    # chart_note = models.TextField(default="")
+
+    def clean(self):
+        if len(self.chart_note) < 20:
+            raise ValidationError("Note needs to be at least 20 characters")
+
+    def save(self, *args, **options):
+        self.clean()
+        super().save(*args, **options)
+
+    def get_absolute_url(self):
+        return reverse("appointments:detail", kwargs={"pk": self.appointment.pk})
