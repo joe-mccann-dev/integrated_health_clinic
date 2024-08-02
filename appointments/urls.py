@@ -6,12 +6,28 @@ from . import views
 app_name = "appointments"
 
 urlpatterns = [
-    path("", views.IndexView.as_view(), name="index"),
-    path("<int:pk>/", views.DetailView.as_view(), name="detail"),
-    path("modify/", views.AddAppointmentView.as_view(), name="add"),
-    path("modify/<int:pk>/", views.UpdateAppointmentView.as_view(), name="update"),
     path(
-        "modify/<int:pk>/delete", views.DeleteAppointmentView.as_view(), name="delete"
+        "", 
+        views.IndexView.as_view(), 
+        name="index"
+    ),
+    path(
+        "<int:pk>/", 
+         views.DetailView.as_view(),
+         name="detail"),
+    path(
+        "modify/",
+        views.AddAppointmentView.as_view(),
+        name="add"
+    ),
+    path("modify/<int:pk>/",
+         views.UpdateAppointmentView.as_view(),
+         name="update"
+    ),
+    path(
+        "modify/<int:pk>/delete",
+        views.DeleteAppointmentView.as_view(),
+        name="delete"
     ),
     path(
         "practitioners/",
@@ -24,23 +40,23 @@ urlpatterns = [
         name="practitioner-detail",
     ),
     path(
-      "practitioners/<int:pk>/appointments",
-      views.PractitionerAppointmentsView.as_view(), 
-      name = "practitioner-appointments"
+        "practitioners/<int:pk>/appointments",
+        views.PractitionerAppointmentsView.as_view(), 
+        name = "practitioner-appointments"
     ),
     path(
-      "notes/practitioners/<int:pk>/",
-      views.PractitionerChartsView.as_view(),
-      name="practitioner-chartnotes",
+        "notes/practitioners/<int:pk>/",
+        views.PractitionerChartsView.as_view(),
+        name="practitioner-chartnotes",
     ),
     path(
-      "notes/<int:pk>",
-      views.AppointmentChartView.as_view(),
-      name="appointment-chartnote",
+        "notes/<int:pk>",
+        views.AppointmentChartView.as_view(),
+        name="appointment-chartnote",
     ),
     path(
-      "notes/<int:appointment_id>/add",
-      views.AddChartNoteView.as_view(),
-      name="add-chartnote"
-    )
+      " notes/<int:appointment_id>/add",
+        views.AddChartNoteView.as_view(),
+        name="add-chartnote"
+    ),
 ]
