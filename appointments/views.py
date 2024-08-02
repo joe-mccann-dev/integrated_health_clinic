@@ -3,8 +3,9 @@ from django.shortcuts import get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from appointments.models import Appointment, Availability, ChartNote, Day, Practitioner
+from appointments.models import Appointment, Availability, ChartNote, Day
 from appointments.forms import AddAppointmentForm, AddChartNoteForm
+from django.apps import apps
 
 # === STANDARD VIEWS ===
 
@@ -70,7 +71,7 @@ class DeleteAppointmentView(DeleteView):
     
 # View utilizes query method to filter appointments by practitioner
 class PractitionerAppointmentsView(generic.DetailView):
-    model = Practitioner
+    model = apps.get_model('practitioners', 'Practitioner')
     template_name = "practitioners/appointments/index.html"
     context_object_name = "practitioner"
 
@@ -89,12 +90,13 @@ class PractitionerIndexView(generic.ListView):
     context_object_name = "practitioners"
 
     def get_queryset(self):
+        Practitioner = apps.get_model('practitioners', 'Practitioner')
         return Practitioner.objects.order_by("practitioner_type", "full_name")
 
 
 # secondary view on practitioner click:
 class PractitionerDetailView(generic.DetailView):
-    model = Practitioner
+    model = apps.get_model('practitioners', 'Practitioner')
     template_name = "practitioners/detail.html"
     context_object_name = "practitioner"
 
@@ -133,7 +135,7 @@ class AddChartNoteView(CreateView):
 
 # view all of a practitioner's completed chart notes
 class PractitionerChartsView(generic.DetailView):
-    model = Practitioner
+    model = apps.get_model('practitioners', 'Practitioner')
     template_name = "practitioners/notes/chartnotes.html"
     context_object_name = "chartnotes"
 
