@@ -25,6 +25,7 @@ from integrated_health_clinic import views
 urlpatterns = [
     path("", views.index, name="index"),
     path('patients/', include('patients.urls')),
+    path('practitioners/', include('practitioners.urls')),
     path('appointments/', include('appointments.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

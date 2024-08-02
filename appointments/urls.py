@@ -30,26 +30,6 @@ urlpatterns = [
         name="delete"
     ),
     path(
-        "practitioners/",
-        views.PractitionerIndexView.as_view(),
-        name="practitioner-index",
-    ),
-    path(
-        "practitioners/<int:pk>",
-        views.PractitionerDetailView.as_view(),
-        name="practitioner-detail",
-    ),
-    path(
-        "practitioners/<int:pk>/appointments",
-        views.PractitionerAppointmentsView.as_view(), 
-        name = "practitioner-appointments"
-    ),
-    path(
-        "notes/practitioners/<int:pk>/",
-        views.PractitionerChartsView.as_view(),
-        name="practitioner-chartnotes",
-    ),
-    path(
         "notes/<int:pk>",
         views.AppointmentChartView.as_view(),
         name="appointment-chartnote",
