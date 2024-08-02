@@ -143,4 +143,3 @@ class UpdatePatientInsuranceView(UpdateView):
     patient_id = self.kwargs.get("patient_id")
     return reverse('patients:detail', kwargs={'pk': patient_id})
     
-  

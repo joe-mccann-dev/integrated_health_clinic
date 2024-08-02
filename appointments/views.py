@@ -1,10 +1,12 @@
 from typing import Any
 from django.shortcuts import get_object_or_404
-from django.urls import reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from appointments.models import Appointment, Availability, ChartNote, Day, Practitioner
 from appointments.forms import AddAppointmentForm, AddChartNoteForm
+
+# === STANDARD VIEWS ===
 
 # initial view on load:
 class IndexView(generic.ListView):
@@ -14,33 +16,6 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Appointment.objects.order_by("appointment_date")
     
-class PractitionerAppointmentsView(generic.DetailView):
-    model = Practitioner
-    template_name = "practitioners/appointments/index.html"
-    context_object_name = "practitioner"
-
-    def get_context_data(self, **kwargs: Any):
-        context = super().get_context_data(**kwargs)
-        practitioner = self.get_object()
-        appointments = practitioner.upcoming_appointments()
-        context["appointments"] = appointments
-
-        return context
-
-# secondary view on appointment click:
-class DetailView(generic.DetailView):
-    model = Appointment
-    template_name = "appointments/detail.html"
-    context_object_name = "appointment"
-
-    def get_context_data(self, **kwargs: Any):
-        context = super().get_context_data(**kwargs)
-        appointment = self.get_object()
-        # retrieves chart note from individual appointment
-        context["chartnote"] = appointment.get_chart_note()
-        return context
-
-
 # view for adding appointment
 class AddAppointmentView(CreateView):
     model = Appointment
@@ -65,6 +40,73 @@ class AddAppointmentView(CreateView):
         form.instance.day = Day(day_id)
         return super().form_valid(form)
     
+# secondary view on appointment click:
+class DetailView(generic.DetailView):
+    model = Appointment
+    template_name = "appointments/detail.html"
+    context_object_name = "appointment"
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        appointment = self.get_object()
+        # retrieves chart note from individual appointment
+        context["chartnote"] = appointment.get_chart_note()
+        return context
+
+# view for updating appointment
+class UpdateAppointmentView(UpdateView):
+    model = Appointment
+    form_class = AddAppointmentForm
+    template_name = "appointments/modify/update.html"
+    success_url = "/appointments"
+
+
+# view for deleting appointment
+class DeleteAppointmentView(DeleteView):
+    model = Appointment
+    template_name = "appointments/modify/delete.html"
+    success_url = "/appointments"
+    context_object_name = "appointment"
+    
+# View utilizes query method to filter appointments by practitioner
+class PractitionerAppointmentsView(generic.DetailView):
+    model = Practitioner
+    template_name = "practitioners/appointments/index.html"
+    context_object_name = "practitioner"
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        practitioner = self.get_object()
+        appointments = practitioner.upcoming_appointments()
+        context["appointments"] = appointments
+
+        return context
+    
+    
+#  === PRACTITIONER VIEWS ==
+class PractitionerIndexView(generic.ListView):
+    template_name = "practitioners/index.html"
+    context_object_name = "practitioners"
+
+    def get_queryset(self):
+        return Practitioner.objects.order_by("practitioner_type", "full_name")
+
+
+# secondary view on practitioner click:
+class PractitionerDetailView(generic.DetailView):
+    model = Practitioner
+    template_name = "practitioners/detail.html"
+    context_object_name = "practitioner"
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        practitioner = self.get_object()
+        context["gender_display"] = practitioner.get_gender_display()
+        context["days_available"] = practitioner.get_available_day_names()
+        return context
+    
+#  === CHART VIEWS ===
+
 class AddChartNoteView(CreateView):
     model = ChartNote
     form_class = AddChartNoteForm
@@ -88,48 +130,6 @@ class AddChartNoteView(CreateView):
         patient = appointment.patient
         context["patient"] = patient
         return context
-    
-
-
-# view for updating appointment
-class UpdateAppointmentView(UpdateView):
-    model = Appointment
-    form_class = AddAppointmentForm
-    template_name = "appointments/modify/update.html"
-    success_url = "/appointments"
-
-
-# view for deleting appointment
-class DeleteAppointmentView(DeleteView):
-    model = Appointment
-    template_name = "appointments/modify/delete.html"
-    success_url = "/appointments"
-    context_object_name = "appointment"
-
-
-#  === practitioner views ==
-class PractitionerIndexView(generic.ListView):
-    template_name = "practitioners/index.html"
-    context_object_name = "practitioners"
-
-    def get_queryset(self):
-        return Practitioner.objects.order_by("practitioner_type", "full_name")
-
-
-# secondary view on practitioner click:
-class PractitionerDetailView(generic.DetailView):
-    model = Practitioner
-    template_name = "practitioners/detail.html"
-    context_object_name = "practitioner"
-
-    def get_context_data(self, **kwargs: Any):
-        context = super().get_context_data(**kwargs)
-        practitioner = self.get_object()
-        context["gender_display"] = practitioner.get_gender_display()
-        context["days_available"] = practitioner.get_available_day_names()
-        return context
-    
-#  === chart views ==
 
 # view all of a practitioner's completed chart notes
 class PractitionerChartsView(generic.DetailView):
