@@ -48,7 +48,7 @@ class ChartNote(models.Model):
 class Appointment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    practitioner = models.ForeignKey('appointments.Practitioner', on_delete=models.CASCADE)
+    practitioner = models.ForeignKey('practitioners.Practitioner', on_delete=models.CASCADE)
     patient = models.ForeignKey('patients.Patient', on_delete=models.CASCADE)
     appointment_date = models.DateField(db_index=True)
     day = models.ForeignKey(Day, on_delete=models.CASCADE)

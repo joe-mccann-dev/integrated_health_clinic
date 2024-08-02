@@ -67,7 +67,7 @@ class Practitioner(models.Model):
     
 class Availability(models.Model):
     # remove availability entries associated with a removed practitioner
-    practitioner = models.ForeignKey('appointments.Practitioner', on_delete=models.CASCADE)
+    practitioner = models.ForeignKey('practitioners.Practitioner', on_delete=models.CASCADE)
     # if day deleted, remove all availability entries for that day
     day = models.ForeignKey(Day, on_delete=models.CASCADE)
     start_time_interval = models.SmallIntegerField(choices=TIME_CHOICES)
