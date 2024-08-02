@@ -1,5 +1,6 @@
 from typing import Any
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from appointments.models import Appointment, ChartNote
 from patients.models import InsuranceInfo, Patient, Prescription
 from django.views import generic
@@ -93,13 +94,19 @@ class AddPatientPrescriptionView(CreateView):
 class DeletePatientPrescriptionView(DeleteView):
     model = Prescription
     template_name = "patients/prescriptions/delete.html"
-    success_url = "/patients"
+    
+    def get_success_url(self):
+      patient_id = self.kwargs.get("patient_id")
+      return reverse('patients:detail', kwargs={'pk': patient_id})
 
 class UpdatePatientPrescriptionView(UpdateView):
   model = Prescription
   form_class = AddPatientPrescriptionForm
   template_name = "patients/prescriptions/update.html"
-  success_url = '/patients'
+  
+  def get_success_url(self):
+    patient_id = self.kwargs.get("patient_id")
+    return reverse('patients:detail', kwargs={'pk': patient_id})
 
 
 # --- INSURANCE VIEWS ---
@@ -108,7 +115,6 @@ class AddPatientInsuranceView(CreateView):
   model = InsuranceInfo
   form_class = AddPatientInsuranceInfoForm
   template_name = "patients/insurance/update.html"
-  success_url = "/patients"
 
   def get_context_data(self, **kwargs : Any):
     context = super().get_context_data(**kwargs)
@@ -117,12 +123,14 @@ class AddPatientInsuranceView(CreateView):
 
     return context;
 
+  def get_success_url(self):
+    patient_id = self.kwargs.get("patient_id")
+    return reverse('patients:detail', kwargs={'pk': patient_id})
 
 class UpdatePatientInsuranceView(UpdateView):
   model = InsuranceInfo
   form_class = AddPatientInsuranceInfoForm
   template_name = "patients/insurance/update.html"
-  success_url = "/patients"
 
   def get_context_data(self, **kwargs : Any):
     context = super().get_context_data(**kwargs)
@@ -130,5 +138,9 @@ class UpdatePatientInsuranceView(UpdateView):
     context["patient"] = get_object_or_404(Patient, pk=patient_id)
 
     return context;
+
+  def get_success_url(self):
+    patient_id = self.kwargs.get("patient_id")
+    return reverse('patients:detail', kwargs={'pk': patient_id})
     
   
