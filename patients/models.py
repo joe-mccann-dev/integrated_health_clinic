@@ -35,13 +35,6 @@ class Patient(models.Model):
       prescriptions = "none"
     return prescriptions
   
-  def get_prescription_instructions(self):
-    try:
-      instructions = Prescription.objects.get(patient = self).instructions
-    except Prescription.DoesNotExist:
-      instructions = "none"
-    return instructions
-  
   def get_insurance_provider(self):
     try:
       provider = InsuranceInfo.objects.get(patient=self).provider
