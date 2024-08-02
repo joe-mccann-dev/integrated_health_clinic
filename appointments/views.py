@@ -83,6 +83,10 @@ class AddChartNoteView(CreateView):
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
+        appointment_id = self.kwargs.get("appointment_id")
+        appointment = get_object_or_404(Appointment, pk=appointment_id)
+        patient = appointment.patient
+        context["patient"] = patient
         return context
     
 

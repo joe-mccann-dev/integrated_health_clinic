@@ -3,7 +3,7 @@
 {% block title %}Create a Chart Note{% endblock %}
 
 {% block content %}
-<h2>Create a Chart Note</h2>
+<h2>Create a Chart Note for <a href="{% url 'patients:detail' patient.id %}">{{patient}}</a></h2>
 
 <div>
   <form method="post">
