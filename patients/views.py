@@ -10,61 +10,70 @@ from patients.forms import AddPatientForm, AddPatientInsuranceInfoForm, AddPatie
 # --- STANDARD PATIENT VIEWS ---
 
 class IndexView(generic.ListView):
-  template_name = "patients/index.html"
-  context_object_name = "patients"
+    template_name = "patients/index.html"
+    context_object_name = "patients"
 
-  def get_queryset(self):
-    return Patient.objects.order_by("-created_at")
+    def get_queryset(self):
+        return Patient.objects.order_by("-created_at")
 
 class DetailView(generic.DetailView):
-  model = Patient
-  template_name = "patients/detail.html"
-  context_object_name = "patient"
+    model = Patient
+    template_name = "patients/detail.html"
+    context_object_name = "patient"
 
-  def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    patient = self.get_object()
-    context["gender_display"] = patient.get_gender_display()
-    context["prescriptions"] = Patient.get_prescriptions(patient)
-    context["insurance"] = Patient.get_insurance_info(patient)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        patient = self.get_object()
+        context["gender_display"] = patient.get_gender_display()
+        context["prescriptions"] = Patient.get_prescriptions(patient)
+        context["insurance"] = Patient.get_insurance_info(patient)
 
-    return context
+        return context
   
 class AddPatientView(CreateView):
-  model = Patient
-  form_class = AddPatientForm
-  template_name = "patients/modify/add.html"
-  success_url = '/patients'
+    model = Patient
+    form_class = AddPatientForm
+    template_name = "patients/modify/add.html"
+    success_url = '/patients'
 
 class UpdatePatientView(UpdateView):
-  model = Patient
-  form_class = AddPatientForm
-  template_name = "patients/modify/update.html"
-  success_url = '/patients'
+    model = Patient
+    form_class = AddPatientForm
+    template_name = "patients/modify/update.html"
+    success_url = '/patients'
 
 class DeletePatientView(DeleteView):
-  model = Patient
-  success_url = '/patients'
-  template_name = "patients/modify/delete.html"
+    model = Patient
+    success_url = '/patients'
+    template_name = "patients/modify/delete.html"
+  
 
-
+# Patient appointment history
+class PatientAppointmentsView(generic.ListView):
+    model = Appointment
+    context_object_name = "appointments"
+    template_name = "appointments/index.html"
+    
+    def get_queryset(self):
+        patient_id = self.kwargs.get("pk")
+        return Appointment.objects.filter(patient = patient_id)
+    
 # --- CHARTS VIEW ---
   
 class PatientChartsView(generic.DetailView):
-  model = Patient
-  template_name = "patients/notes/chartnotes.html"
-  context_object_name = "chartnotes"
+    model = Patient
+    template_name = "patients/chartnotes/chartnotes.html"
+    context_object_name = "chartnotes"
 
-  def get_context_data(self, **kwargs):
-    context = super().get_context_data(**kwargs)
-    patient = self.get_object()
-    appointments = Appointment.objects.filter(patient = patient)
-    chart_notes = ChartNote.objects.filter(appointment__in=appointments)
-    context["chartnotes"] = chart_notes
-    context["appointments"] = appointments
-    context["patient"] = patient
-
-    return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        patient = self.get_object()
+        appointments = Appointment.objects.filter(patient = patient)
+        chart_notes = ChartNote.objects.filter(appointment__in=appointments)
+        context["chartnotes"] = chart_notes
+        context["appointments"] = appointments
+        context["patient"] = patient
+        return context
   
 # --- PRESCRIPTION VIEWS ---
 
@@ -81,11 +90,10 @@ class AddPatientPrescriptionView(CreateView):
       return initial
   
   def get_context_data(self, **kwargs : Any):
-    context = super().get_context_data(**kwargs)
-    patient_id = self.kwargs.get("patient_id")
-    context["patient"] = get_object_or_404(Patient, pk=patient_id)
-
-    return context
+      context = super().get_context_data(**kwargs)
+      patient_id = self.kwargs.get("patient_id")
+      context["patient"] = get_object_or_404(Patient, pk=patient_id)
+      return context
     
   def form_valid(self, form):
       form.instance.patient = get_object_or_404(Patient, pk=self.kwargs.get("patient_id"))
@@ -100,46 +108,46 @@ class DeletePatientPrescriptionView(DeleteView):
       return reverse('patients:detail', kwargs={'pk': patient_id})
 
 class UpdatePatientPrescriptionView(UpdateView):
-  model = Prescription
-  form_class = AddPatientPrescriptionForm
-  template_name = "patients/prescriptions/update.html"
+    model = Prescription
+    form_class = AddPatientPrescriptionForm
+    template_name = "patients/prescriptions/update.html"
   
-  def get_success_url(self):
-    patient_id = self.kwargs.get("patient_id")
-    return reverse('patients:detail', kwargs={'pk': patient_id})
+    def get_success_url(self):
+        patient_id = self.kwargs.get("patient_id")
+        return reverse('patients:detail', kwargs={'pk': patient_id})
 
 
 # --- INSURANCE VIEWS ---
 
 class AddPatientInsuranceView(CreateView):
-  model = InsuranceInfo
-  form_class = AddPatientInsuranceInfoForm
-  template_name = "patients/insurance/update.html"
+    model = InsuranceInfo
+    form_class = AddPatientInsuranceInfoForm
+    template_name = "patients/insurance/update.html"
 
-  def get_context_data(self, **kwargs : Any):
-    context = super().get_context_data(**kwargs)
-    patient_id = self.kwargs.get("patient_id")
-    context["patient"] = get_object_or_404(Patient, pk=patient_id)
+    def get_context_data(self, **kwargs : Any):
+        context = super().get_context_data(**kwargs)
+        patient_id = self.kwargs.get("patient_id")
+        context["patient"] = get_object_or_404(Patient, pk=patient_id)
 
-    return context;
+        return context;
 
-  def get_success_url(self):
-    patient_id = self.kwargs.get("patient_id")
-    return reverse('patients:detail', kwargs={'pk': patient_id})
+    def get_success_url(self):
+        patient_id = self.kwargs.get("patient_id")
+        return reverse('patients:detail', kwargs={'pk': patient_id})
 
 class UpdatePatientInsuranceView(UpdateView):
-  model = InsuranceInfo
-  form_class = AddPatientInsuranceInfoForm
-  template_name = "patients/insurance/update.html"
+    model = InsuranceInfo
+    form_class = AddPatientInsuranceInfoForm
+    template_name = "patients/insurance/update.html"
 
-  def get_context_data(self, **kwargs : Any):
-    context = super().get_context_data(**kwargs)
-    patient_id = self.kwargs.get("patient_id")
-    context["patient"] = get_object_or_404(Patient, pk=patient_id)
+    def get_context_data(self, **kwargs : Any):
+        context = super().get_context_data(**kwargs)
+        patient_id = self.kwargs.get("patient_id")
+        context["patient"] = get_object_or_404(Patient, pk=patient_id)
 
-    return context;
+        return context;
 
-  def get_success_url(self):
-    patient_id = self.kwargs.get("patient_id")
-    return reverse('patients:detail', kwargs={'pk': patient_id})
+    def get_success_url(self):
+        patient_id = self.kwargs.get("patient_id")
+        return reverse('patients:detail', kwargs={'pk': patient_id})
     

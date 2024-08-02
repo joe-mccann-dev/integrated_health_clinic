@@ -72,5 +72,8 @@
                 <a href="{% url 'patients:patient-chartnotes' patient.id %}">View chart notes for this patient</a>
             </li>
         </ul>
+        <br>
+        <h4>Appointment History</h4>
+        <a href="{% url 'patients:patient-appointments' patient.id %}">View all patient appointments</a>
     </ul>
     {% endblock %}

@@ -30,7 +30,12 @@ urlpatterns = [
         name="delete"
     ),
     path(
-        "<int:pk>/notes",
+        "<int:pk>/appointments",
+        views.PatientAppointmentsView.as_view(),
+        name="patient-appointments"    
+    ),
+    path(
+        "<int:pk>/chartnotes",
         views.PatientChartsView.as_view(),
         name="patient-chartnotes"
     ),
