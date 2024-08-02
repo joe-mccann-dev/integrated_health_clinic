@@ -10,13 +10,15 @@ class Command(BaseCommand):
     try:
       call_command("seed_time_table")
       self.stdout.write(self.style.SUCCESS("Time Table seeded successfully."))
+      
+      call_command("loaddata", "seed_days")
 
       call_command("loaddata", "seed_practitioners")
       self.stdout.write(self.style.SUCCESS('Practitioner table seeded successfully.'))
-
+      
       call_command("loaddata", "seed_patients")
       self.stdout.write(self.style.SUCCESS("Patient table seeded successfully."))
-
+      
       call_command("loaddata", "seed_appointments")
       self.stdout.write(self.style.SUCCESS("Appointment table seeded successfully."))
 

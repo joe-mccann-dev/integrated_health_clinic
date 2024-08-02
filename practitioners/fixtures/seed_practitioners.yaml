@@ -1,4 +1,4 @@
-- model: appointments.practitioner
+- model: practitioners.practitioner
   pk: 1
   fields:
     created_at: "2024-07-25T00:41:05.500072Z"
@@ -10,7 +10,7 @@
     license_number: "GZ123456789"
     practitioner_type: "physician"
     is_prescriber: True
-- model: appointments.practitioner
+- model: practitioners.practitioner
   pk: 2
   fields:
     created_at: "2024-07-25T00:41:05.500072Z"
@@ -22,7 +22,7 @@
     license_number: "AZ783717173"
     practitioner_type: "massage_therapist"
     is_prescriber: False
-- model: appointments.practitioner
+- model: practitioners.practitioner
   pk: 3
   fields:
     created_at: "2024-07-25T00:41:05.500072Z"
@@ -34,7 +34,7 @@
     license_number: "AZ78372FG73"
     practitioner_type: "physician_assistant"
     is_prescriber: True
-- model: appointments.practitioner
+- model: practitioners.practitioner
   pk: 4
   fields:
     created_at: "2024-07-25T00:41:05.500072Z"
@@ -46,7 +46,7 @@
     license_number: "BZ783717174"
     practitioner_type: "physical_therapist"
     is_prescriber: True
-- model: appointments.practitioner
+- model: practitioners.practitioner
   pk: 5
   fields:
     created_at: "2024-07-25T00:41:05.500072Z"
@@ -58,7 +58,7 @@
     license_number: "MZ783231176"
     practitioner_type: "acupuncturist"
     is_prescriber: False
-- model: appointments.practitioner
+- model: practitioners.practitioner
   pk: 6
   fields:
     created_at: "2024-07-25T00:41:05.500072Z"
@@ -70,7 +70,7 @@
     license_number: "BR191919323"
     practitioner_type: "chiropractor"
     is_prescriber: False
-- model: appointments.practitioner
+- model: practitioners.practitioner
   pk: 7
   fields:
     created_at: "2024-07-25T00:41:05.500072Z"
@@ -83,40 +83,10 @@
     practitioner_type: "nurse_practitioner"
     is_prescriber: True
 
-
-- model: appointments.day
-  fields:
-    day_id: 1
-    name: Monday
-- model: appointments.day
-  fields:
-    day_id: 2
-    name: Tuesday
-- model: appointments.day
-  fields:
-    day_id: 3
-    name: Wednesday
-- model: appointments.day
-  fields:
-    day_id: 4
-    name: Thursday
-- model: appointments.day
-  fields:
-    day_id: 5
-    name: Friday
-- model: appointments.day
-  fields:
-    day_id: 6
-    name: Saturday
-- model: appointments.day
-  fields:
-    day_id: 7
-    name: Sunday
-
 # Physician John Smith Available Monday (1), Wednesday (3), Friday (5) 9:00AM to 12:00PM
 # Availability Entry for each day available. Intervals every 10 minutes identified by ID
 # Monday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 1
     day: 1
@@ -125,7 +95,7 @@
     # Interval 73 = 12:00 PM
     end_time_interval: 73
 # Wednesday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 1
     day: 3
@@ -134,7 +104,7 @@
     # Interval 73 = 12:00 PM
     end_time_interval: 73
 # Friday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 1
     day: 5
@@ -145,7 +115,7 @@
 
 # Massage Therapist Amanda Wong is available Tuesday, Thursday, Saturday, Sunday 2PM to 8PM
 # Tuesday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 2
     day: 2
@@ -154,7 +124,7 @@
     # Interval 121 = 8:00 PM
     end_time_interval: 121
 # Thursday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 2
     day: 4
@@ -163,7 +133,7 @@
     # Interval 121 = 8:00 PM
     end_time_interval: 121
 # Saturday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 2
     day: 6
@@ -172,7 +142,7 @@
     # Interval 121 = 8:00 PM
     end_time_interval: 121
 # Sunday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 2
     day: 7
@@ -183,21 +153,21 @@
 
 # Physician Assistant Dirk Nowizski is available Monday, Wednesday, Friday from 1:00 PM to 7:00 PM
 # Monday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 3
     day: 1
     start_time_interval: 79
     end_time_interval: 115
 # Wednesday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 3
     day: 3
     start_time_interval: 79
     end_time_interval: 115
 # Friday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 3
     day: 5
@@ -206,28 +176,28 @@
 
 # Physical Therapist Trevor McDonald is available Monday, Tuesday, Wednesday, Saturday from 7:30 AM to 12:30 PM
 # Monday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 4
     day: 1
     start_time_interval: 46
     end_time_interval: 76
 # Tuesday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 4
     day: 2
     start_time_interval: 46
     end_time_interval: 76
 # Wedndesday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 4
     day: 3
     start_time_interval: 46
     end_time_interval: 76
 # Saturday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 4
     day: 6
@@ -236,7 +206,7 @@
 
 # Acupunturist Janice Westley is available Monday, Wednesday, Friday 3:00 PM to 7:00 PM and Saturday 9:00 AM to 1:00 PM
 # Monday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 5
     day: 1
@@ -244,21 +214,21 @@
     end_time_interval: 115
 
 # Wednesday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 5
     day: 3
     start_time_interval: 91
     end_time_interval: 115
 # Friday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 5
     day: 5
     start_time_interval: 91
     end_time_interval: 115
 # Saturday
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 5
     day: 6
@@ -266,31 +236,31 @@
     end_time_interval: 79
 
 # Chiropractor Christopher Johnson is available Monday - Friday 8:00 AM to 1:00 PM
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 6
     day: 1
     start_time_interval: 49
     end_time_interval: 79
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 6
     day: 2
     start_time_interval: 49
     end_time_interval: 79
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 6
     day: 3
     start_time_interval: 49
     end_time_interval: 79
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 6
     day: 4
     start_time_interval: 49
     end_time_interval: 79
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 6
     day: 5
@@ -298,25 +268,25 @@
     end_time_interval: 79
 
 # Nurse Practitioner Christine Nolan is available Tuesday, Thursay, Friday 10:00 AM to 4:00 PM and Sunday 11:00 AM to 5:00 PM
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 7
     day: 2
     start_time_interval: 61
     end_time_interval: 97
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 7
     day: 4
     start_time_interval: 61
     end_time_interval: 97
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 7
     day: 5
     start_time_interval: 61
     end_time_interval: 97
-- model: appointments.availability
+- model: practitioners.availability
   fields:
     practitioner: 7
     day: 7
