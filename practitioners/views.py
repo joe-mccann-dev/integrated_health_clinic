@@ -15,7 +15,7 @@ class PractitionerIndexView(generic.ListView):
 # secondary view on practitioner click:
 class PractitionerDetailView(generic.DetailView):
     model = apps.get_model('practitioners', 'Practitioner')
-    template_name = "practitioners/detail.html"
+    template_name = "detail.html"
     context_object_name = "practitioner"
 
     def get_context_data(self, **kwargs: Any):
@@ -23,6 +23,20 @@ class PractitionerDetailView(generic.DetailView):
         practitioner = self.get_object()
         context["gender_display"] = practitioner.get_gender_display()
         context["days_available"] = practitioner.get_available_day_names()
+        return context
+    
+# View utilizes query method to filter appointments by practitioner
+class PractitionerAppointmentsView(generic.DetailView):
+    model = apps.get_model('practitioners', 'Practitioner')
+    template_name = "practitioners/appointments/index.html"
+    context_object_name = "practitioner"
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        practitioner = self.get_object()
+        appointments = practitioner.upcoming_appointments()
+        context["appointments"] = appointments
+
         return context
     
 # view all of a practitioner's completed chart notes
@@ -40,18 +54,4 @@ class PractitionerChartsView(generic.DetailView):
         ChartNote = apps.get_model('appointments', 'ChartNote')
         context["notes"] = ChartNote.objects.filter(appointment__in=appointments)
         context["practitioner"] = practitioner
-        return context
-
-# View utilizes query method to filter appointments by practitioner
-class PractitionerAppointmentsView(generic.DetailView):
-    model = apps.get_model('practitioners', 'Practitioner')
-    template_name = "practitioners/appointments/index.html"
-    context_object_name = "practitioner"
-
-    def get_context_data(self, **kwargs: Any):
-        context = super().get_context_data(**kwargs)
-        practitioner = self.get_object()
-        appointments = practitioner.upcoming_appointments()
-        context["appointments"] = appointments
-
         return context
