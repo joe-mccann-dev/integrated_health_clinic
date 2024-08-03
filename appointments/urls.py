@@ -20,10 +20,6 @@ urlpatterns = [
         views.AddAppointmentView.as_view(),
         name="add"
     ),
-    path("modify/<int:pk>/",
-         views.UpdateAppointmentView.as_view(),
-         name="update"
-    ),
     path(
         "modify/<int:pk>/delete",
         views.DeleteAppointmentView.as_view(),

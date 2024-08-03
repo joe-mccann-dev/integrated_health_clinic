@@ -53,14 +53,6 @@ class DetailView(generic.DetailView):
         context["chartnote"] = appointment.get_chart_note()
         return context
 
-# view for updating appointment
-class UpdateAppointmentView(UpdateView):
-    model = Appointment
-    form_class = AddAppointmentForm
-    template_name = "appointments/modify/update.html"
-    success_url = "/appointments"
-
-
 # view for deleting appointment
 class DeleteAppointmentView(DeleteView):
     model = Appointment

@@ -75,7 +75,8 @@ class Appointment(models.Model):
         day = Day.objects.get(day_id=day_id)
 
         if day not in get_available_day_objects(self.practitioner):
-            raise ValidationError("Practitioner is available on " + get_available_day_names(self.practitioner))
+            available_day_names = self.practitioner.get_available_day_names()
+            raise ValidationError("Practitioner is available on " + available_day_names)
     
         self.validate_appointment_available()
         self.validate_appointment_intervals()
