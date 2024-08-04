@@ -1,22 +1,22 @@
-{% extends "base.html" %} 
-{% block title %} 
-Appointments Index 
-{% endblock %} 
+{% extends "base.html" %}
+{% block title %}
+Appointments Index
+{% endblock %}
 {%block content %}
 <h2>Scheduled Appointments</h2>
 <nav>
-  <a href="{% url 'appointments:add' %}">Book a New Appointment</a>
+    <a href="{% url 'appointments:add' %}">Book a New Appointment</a>
 </nav>
 <ul class="appt-list">
-{% for appt in appointments %}
-<li>
-  <p class="patient-name">{{appt.patient}}</p>
-  <a href="{% url 'appointments:detail' appt.id %}">
-    <p>{{appt.appointment_date}}</p>
-    <p>{{appt.start_time}} - {{appt.end_time}}</p>
-  </a>
-  <p>{{appt.practitioner}}</p>
-</li>
-{% endfor %}
+    {% for appt in appointments %}
+    <li>
+        <p class="patient-name">{{appt.patient}}</p>
+        <a href="{% url 'appointments:detail' appt.id %}">
+            <p>{{appt.appointment_date}}</p>
+            <p>{{appt.start_time}} - {{appt.end_time}}</p>
+        </a>
+        <p>{{appt.practitioner}}</p>
+    </li>
+    {% endfor %}
 </ul>
 {% endblock content %}

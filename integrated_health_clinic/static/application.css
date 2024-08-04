@@ -13,7 +13,10 @@
 html {
   box-sizing: border-box;
 }
-*, *::before, *::after {
+
+*,
+*::before,
+*::after {
   box-sizing: inherit;
   border: none;
   outline: none;
@@ -23,7 +26,8 @@ html {
 
 body {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  gap: 24px;
   font-family: 'Lato', sans-serif;
   color: var(--slate-800);
   background-color: var(--slate-50);
@@ -37,7 +41,10 @@ body {
   gap: 12px;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-weight: 300;
 }
 
@@ -56,15 +63,18 @@ form p {
   width: 300px;
 }
 
-p select, date {
+p select,
+date {
   padding: 4px;
   margin: 4px 0;
 }
 
-input[type=date], input[type=text], input[type=email] {
+input[type=date],
+input[type=text],
+input[type=email] {
   padding: 4px;
   margin: 4px 0;
-} 
+}
 
 input[type=submit] {
   margin: 12px 0;
@@ -84,14 +94,15 @@ a {
   color: var(--indigo-500);
 }
 
-a:link { 
+a:link {
   text-decoration: none;
   color: var(--indigo-500);
-} 
-a:visited { 
+}
+
+a:visited {
   text-decoration: none;
   color: var(--indigo-500);
-} 
+}
 
 a:hover {
   text-decoration: underline;
@@ -117,7 +128,7 @@ a:hover {
 .chart-note {
   width: 600px;
   padding: 12px;
-  margin: 12px 0;
+  margin: 12px;
   border: solid 2px var(--slate-500);
   border-radius: 12px;
   background-color: var(--slate-100);
