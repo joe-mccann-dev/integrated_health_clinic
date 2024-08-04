@@ -3,7 +3,8 @@ from django.urls import reverse
 from practitioners.models import Availability
 from django.core.exceptions import ValidationError
 from appointments.time_choices import TIME_CHOICES
-from practitioners.utils import get_available_day_objects, get_available_day_names
+from practitioners.utils import get_available_day_objects
+from datetime import date
 
 class TimeTable(models.Model):
     def __str__(self):
@@ -69,6 +70,9 @@ class Appointment(models.Model):
         {self.start_time()} - {self.end_time()}"""
   
     def clean(self):
+        if self.appointment_date < date.today():
+            raise ValidationError('Appointment date must be today or later')
+        
         # dateime.weekday() counts Monday as 0, in this app it equals 1
         day_id = self.appointment_date.weekday() + 1
         available_day_objects = get_available_day_objects(self.practitioner)

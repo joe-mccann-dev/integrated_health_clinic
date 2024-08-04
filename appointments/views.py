@@ -38,6 +38,7 @@ class AddAppointmentView(CreateView):
     def form_valid(self, form):
         day_id = form.instance.appointment_date.weekday() + 1
         form.instance.day = Day(day_id)
+        form.instance.start_time = 50
         return super().form_valid(form)
     
 # secondary view on appointment click:
