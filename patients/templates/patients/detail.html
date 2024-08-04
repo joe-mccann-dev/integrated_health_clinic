@@ -55,10 +55,10 @@
                             Instructions: <span class="attribute">{{script.instructions}}</span>
                         </li>
                         <li>
-                            <nav>
+                            <div>
                                 <a href="{% url 'patients:update-prescription' patient.id script.id %}">Update</a>
                                 <a href="{% url 'patients:delete-prescription' patient.id script.id %}">Delete</a>
-                            </nav>
+                            </div>
                         </li>
                     </ul>
                 </li>
