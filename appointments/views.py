@@ -21,7 +21,6 @@ class AddAppointmentView(CreateView):
     model = Appointment
     form_class = AddAppointmentForm
     template_name = "appointments/modify/add.html"
-    success_url = "/appointments"
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
@@ -97,7 +96,7 @@ class AppointmentChartView(generic.DetailView):
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
-        chart_note = self.get_object()
+        chart_note = app
         context["chartnote"] = chart_note
 
         return context

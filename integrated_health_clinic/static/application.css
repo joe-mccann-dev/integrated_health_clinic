@@ -41,6 +41,8 @@ body {
   gap: 12px;
 }
 
+
+
 h1,
 h2,
 h3,
@@ -132,6 +134,16 @@ a:hover {
   border: solid 2px var(--slate-500);
   border-radius: 12px;
   background-color: var(--slate-100);
+  word-wrap: break-word;
+}
+
+.chart-note-form textarea {
+  padding: 24px;
+  height: 400px;
+  width: 600px;
+  background-color: var(--slate-600);
+  color: var(--slate-50);
+  font-size: 24px;
 }
 
 .appt-list {

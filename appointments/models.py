@@ -68,6 +68,9 @@ class Appointment(models.Model):
         {self.patient} |
         {self.appointment_date} |
         {self.start_time()} - {self.end_time()}"""
+    
+    def get_absolute_url(self):
+        return reverse("appointments:detail", kwargs={"pk": self.pk})
   
     def clean(self):
         if self.appointment_date < date.today():
