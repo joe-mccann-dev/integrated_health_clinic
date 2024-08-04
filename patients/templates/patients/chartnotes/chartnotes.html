@@ -7,18 +7,19 @@
 <h2>Patient Charts</h2>
 <h3>Viewing chart notes for <a href="{% url 'patients:detail' patient.id %}">{{patient}}</a></h3>
 <div>
-  <ul>
-    {% for note in chartnotes %}
-      <li>
-        <p>
-          <a href="{% url 'appointments:detail' note.appointment.practitioner.id %}">
-            {{note.appointment.practitioner}} on {{note.appointment.appointment_date}}
-          </a></p>
-        <div class="chart-note">
-          <p>{{note.chart_note}}</p>
-        </div>
-      </li>
-    {% endfor%}
+    <ul>
+        {% for note in chartnotes %}
+        <li>
+            <p>
+                <a href="{% url 'appointments:detail' note.appointment.id %}">
+                    {{note.appointment.practitioner}} on {{note.appointment.appointment_date}}
+                </a>
+            </p>
+            <div class="chart-note">
+                <p>{{note.chart_note}}</p>
+            </div>
+        </li>
+        {% endfor%}
     </ul>
 
 </div>
