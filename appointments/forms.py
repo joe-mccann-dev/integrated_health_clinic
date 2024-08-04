@@ -29,4 +29,5 @@ class AddChartNoteForm(forms.ModelForm):
     class Meta:
         model = ChartNote
         exclude = ['appointment']
+        labels = { "chart_note": "primary complaint, findings, etc."}
         

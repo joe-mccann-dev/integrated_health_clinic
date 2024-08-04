@@ -96,7 +96,7 @@ class AppointmentChartView(generic.DetailView):
 
     def get_context_data(self, **kwargs: Any):
         context = super().get_context_data(**kwargs)
-        chart_note = app
+        chart_note = self.get_object()
         context["chartnote"] = chart_note
 
         return context
