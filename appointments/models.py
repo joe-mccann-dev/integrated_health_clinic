@@ -24,7 +24,7 @@ class ChartNote(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     # prevent removal of important medical history
-    appointment = models.ForeignKey('appointments.Appointment', on_delete=models.RESTRICT)
+    appointment = models.OneToOneField('appointments.Appointment', on_delete=models.RESTRICT)
     chart_note = models.TextField(default="")
 
     def clean(self):
