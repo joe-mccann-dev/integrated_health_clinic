@@ -17,7 +17,7 @@
                 </a>
             </p>
             <div class="chart-note">
-                <p>{{note.chart_note}}</p>
+                {{ note.chart_note.html|safe }}
             </div>
         </li>
         {% endfor%}

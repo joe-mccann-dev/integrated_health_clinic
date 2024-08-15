@@ -10,17 +10,6 @@
     start_time_interval: 91
     end_time_interval: 94
 
-- model: appointments.chartnote
-  fields:
-    created_at: "2024-07-31T21:00:00.000000-04:00"
-    updated_at: "2024-07-31T21:00:00.000000-04:00"
-    appointment: 1
-    chart_note: >
-      Subjective: Patient complained of joint pain in right knee
-      Objective: Limited mobility of major limbs. Patient moves slowly
-      Assessment: Stagnation in GB channel.
-      Plan: Treatments 2x/week. Support LV channel.
-
 - model: appointments.appointment
   pk: 2
   fields:
@@ -32,15 +21,6 @@
     day: 4
     start_time_interval: 85
     end_time_interval: 91
-
-- model: appointments.chartnote
-  fields:
-    created_at: "2024-07-31T21:00:00.000000-04:00"
-    updated_at: "2024-07-31T21:00:00.000000-04:00"
-    appointment: 2
-    chart_note: >
-      Patient complained of a large knot in upper back. 
-      Performed deep tissue massage on entire back and neck.
 
 - model: appointments.appointment
   pk: 3
@@ -54,16 +34,6 @@
     start_time_interval: 61
     end_time_interval: 64
 
-- model: appointments.chartnote
-  fields:
-    created_at: "2024-07-29T18:52:43.123458-04:00"
-    updated_at: "2024-07-29T18:52:43.123458-04:00"
-    appointment: 3
-    chart_note: >
-      Main Complaint: Fever with upset stomach
-      Diagnosis: Flu
-      Patient advice: rest with lots of fluids
-
 - model: appointments.appointment
   pk: 4
   fields:
@@ -75,17 +45,6 @@
     day: 5
     start_time_interval: 73
     end_time_interval: 76
-
-- model: appointments.chartnote
-  fields:
-    created_at: "2024-07-29T18:52:43.123458-04:00"
-    updated_at: "2024-07-29T18:52:43.123458-04:00"
-    appointment: 4
-    chart_note: >
-      Diagnosis: Type 2 diabetes
-      Lab results indicate an A1C of 7.5%
-      Schedule follow up bloodwork in 6 months
-      Prescription: more regular exercice. limit refined carbohydrates
 
 - model: appointments.appointment
   pk: 5
@@ -99,18 +58,6 @@
     start_time_interval: 79
     end_time_interval: 82
 
-- model: appointments.chartnote
-  fields:
-    created_at: "2024-07-29T18:52:43.123458-04:00"
-    updated_at: "2024-07-29T18:52:43.123458-04:00"
-    appointment: 5
-    chart_note: >
-      Patient arrived for routine physical exam. No abnormal findings.
-      Patient complains of occassional insomnia
-      but not enough to warrant medication at this time.
-      Recommendation: Cardio exercise 30 minutes a day
-
-
 - model: appointments.appointment
   pk: 6
   fields:
@@ -122,17 +69,7 @@
     day: 1
     start_time_interval: 58
     end_time_interval: 61
-
-- model: appointments.chartnote
-  fields:
-    created_at: "2024-07-29T18:52:43.123458-04:00"
-    updated_at: "2024-07-29T18:52:43.123458-04:00"
-    appointment: 6
-    chart_note: >
-      Main Complaint: Patient arrived with severe R wrist pain
-      Diagnosis: Simple fracture of R distal radius
       
-
 - model: appointments.appointment
   pk: 7
   fields:
@@ -144,15 +81,6 @@
     day: 2
     start_time_interval: 91
     end_time_interval: 94
-
-- model: appointments.chartnote
-  fields:
-    created_at: "2024-07-29T18:52:43.123458-04:00"
-    updated_at: "2024-07-29T18:52:43.123458-04:00"
-    appointment: 7
-    chart_note: >
-      Patient complained of tennis elbow in left arm.
-      Performed 30 minutes of myofascial release therapy
 
 
 - model: appointments.appointment
@@ -167,16 +95,6 @@
     start_time_interval: 97
     end_time_interval: 100
 
-- model: appointments.chartnote
-  fields:
-    created_at: "2024-07-29T18:52:43.123458-04:00"
-    updated_at: "2024-07-29T18:52:43.123458-04:00"
-    appointment: 8
-    chart_note: >
-      Main Complaint: Persistent dry cough for the past six months
-      Patient is heavy smoker. Reports smoking a pack per day for years.
-      Recommendation: Referral to oncologist for cancer screening.
-
 - model: appointments.appointment
   pk: 9
   fields:
@@ -189,14 +107,6 @@
     start_time_interval: 100
     end_time_interval: 103
   
-- model: appointments.chartnote
-  fields:
-    created_at: "2024-07-29T18:52:43.123458-04:00"
-    updated_at: "2024-07-29T18:52:43.123458-04:00"
-    appointment: 9
-    chart_note: >
-      Anxiety and depression. Anxiety worse than depression.
-      Recommended acupuncture 1x/week for 2 months to start
 
 - model: appointments.appointment
   pk: 10
@@ -209,14 +119,3 @@
     day: 6
     start_time_interval: 46
     end_time_interval: 49
-
-- model: appointments.chartnote
-  fields:
-    created_at: "2024-07-29T18:52:43.123458-04:00"
-    updated_at: "2024-07-29T18:52:43.123458-04:00"
-    appointment: 10
-    chart_note: >
-      Main Complaint: bilateral knee pain that is worse after running more than 2 miles.
-      Diagnosis. IT Band Syndrome
-      Recommended Treatment: Twice weekly exercise sessions to strengthen core 
-      and hip abduction muscles

@@ -5,6 +5,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from appointments.models import Appointment, Availability, ChartNote, Day
 from appointments.forms import AddAppointmentForm, AddChartNoteForm
 from django.apps import apps
+from django_quill.forms import QuillFormField
 
 # === STANDARD VIEWS ===
 

@@ -2,6 +2,7 @@ from django import forms
 from .models import Appointment, ChartNote
 from django.apps import apps
 from datetime import date
+from django_quill.forms import QuillFormField
 
 class AddAppointmentForm(forms.ModelForm):
     class Meta:

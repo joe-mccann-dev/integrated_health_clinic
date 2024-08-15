@@ -1,4 +1,5 @@
 from django.db import models
+from django_quill.fields import QuillField
 from django.urls import reverse
 from practitioners.models import Availability
 from django.core.exceptions import ValidationError
@@ -25,11 +26,10 @@ class ChartNote(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     # prevent removal of important medical history
     appointment = models.OneToOneField('appointments.Appointment', on_delete=models.RESTRICT)
-    chart_note = models.TextField(default="")
+    chart_note = QuillField()
 
     def clean(self):
-        if len(self.chart_note) < 20:
-            raise ValidationError("Note needs to be at least 20 characters")
+        pass
 
     def save(self, *args, **options):
         self.clean()

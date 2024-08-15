@@ -7,9 +7,9 @@
 <h3>Appointment Note</h3>
 <h4>{{chartnote.appointment}}</h3>
 
-<div class="chart-note">
-  <p>{{chartnote.chart_note}}</p>
-</div>
+    <div class="chart-note">
+        {{ chartnote.chart_note.html|safe }}
+    </div>
 
-<a href="{% url 'patients:detail' chartnote.appointment.patient.id %}">Return to patient detail</a>
-{% endblock %}
+    <a href="{% url 'patients:detail' chartnote.appointment.patient.id %}">Return to patient detail</a>
+    {% endblock %}

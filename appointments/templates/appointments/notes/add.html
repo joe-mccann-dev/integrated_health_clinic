@@ -6,10 +6,11 @@
 <h2>Create a Chart Note for <a href="{% url 'patients:detail' patient.id %}">{{patient}}</a></h2>
 
 <div>
-    <form method="post" class="chart-note-form">
+    <form method="post" id="editor-container">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Save Chart Note">
+        <input type="submit" value="Submit">
+    </form>
 </div>
 
 {% endblock %}
