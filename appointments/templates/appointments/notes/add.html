@@ -9,12 +9,12 @@
     <form method="post" id="editor-container">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Save Permanent Patient Record" onclick="confirmSubmit(event)">
+        <input type="submit" value="Save Permanent Patient Record" onclick="confirmSubmit()">
     </form>
 </div>
 
 <script>
-    function confirmSubmit(event) {
+    function confirmSubmit() {
         return confirm("Are you sure?")
     }
 </script>
