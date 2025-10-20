@@ -9,7 +9,9 @@ This combined scheduling and charting web application is a group project for CIS
 ## Installation
 
 1. Install PostgreSQL (setup your default user and password)
-2. enter `pip install -r requirements.txt`
+2. For conda environment, first activate your conda environment, then: 
+    - `conda install --yes --file requirements.txt`
+    - `pip install -r requirements-pip.txt`
 3. Enter Python shell. Generate django secret key:
   ```python
     from django.core.management.utils import get_random_secret_key
@@ -33,6 +35,21 @@ This combined scheduling and charting web application is a group project for CIS
 - Scheduling
 - Record Keeping
 - Charting
+- Create a new patient
+- Update patient information
+- Update patient prescriptions
+- View patient Chart notes
+- View patient appointment history
+
+
+## Screenshots
+
+![scheduled appointments view](screenshots/scheduled-appts.png)
+![chart detail](screenshots/charts.png)
+![patient details](screenshots/patient-details.png)
+![schedule appt form](screenshots/schedule-appt-form.png)
+![appointment details](screenshots/appt-details.png)
+
 
 ## Schema Database Design
 

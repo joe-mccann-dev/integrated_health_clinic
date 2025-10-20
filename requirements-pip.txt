@@ -1,0 +1,1 @@
+django-quill-editor>=0.1.40
